@@ -1,0 +1,492 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"siz",
+				"sizScreenX"
+			],
+			[
+				"ob",
+				"object	object"
+			],
+			[
+				"Si",
+				"SizZoneZ"
+			],
+			[
+				"mouse",
+				"mouse	mouseY"
+			],
+			[
+				"For",
+				"ForAbsX"
+			],
+			[
+				"Fo",
+				"ForAbsY"
+			],
+			[
+				"ForA",
+				"ForAbsX"
+			],
+			[
+				"res",
+				"resetX"
+			],
+			[
+				"pi",
+				"pi	PI"
+			],
+			[
+				"Pos",
+				"PosX"
+			],
+			[
+				"dis",
+				"disTime"
+			],
+			[
+				"D",
+				"disTime"
+			],
+			[
+				"P",
+				"PosY"
+			],
+			[
+				"Po",
+				"PosX"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Processing/Processing.sublime-build",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: U",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"Instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"b",
+				"Build: scalac"
+			],
+			[
+				"scala",
+				"Build: scalac"
+			],
+			[
+				"",
+				"Build: vc r Build"
+			],
+			[
+				"Build",
+				"Build: vc r Build"
+			],
+			[
+				"Buil",
+				"Build: vc r Build"
+			],
+			[
+				"Build:vc",
+				"Build: vc r Build Run"
+			],
+			[
+				"Bui",
+				"Build: vc r Build"
+			],
+			[
+				"Build vc",
+				"Build: vc d Build"
+			],
+			[
+				"B",
+				"Build: vc d Build Run"
+			],
+			[
+				"build",
+				"Build: vc d Build Run"
+			],
+			[
+				"build: ",
+				"Build: Build"
+			],
+			[
+				" ",
+				"Package Control: Install Package"
+			],
+			[
+				"build:",
+				"Build: Build"
+			],
+			[
+				"lua ",
+				"Set Syntax: Lua"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"Install Package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 386.0
+	},
+	"console":
+	{
+		"height": 309.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/trit/Documents/Program/sbttemplate/build.sbt",
+		"/C/Users/trit/Documents/Program/sbttemplate/build/Build.scala",
+		"/C/Users/trit/Documents/GitHub/FDFM/main/test4.lua",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites_pri/meteorites_pri.pde",
+		"/C/Users/trit/AppData/Roaming/Sublime Text 2/Packages/User/sbt.sublime-build",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/cell/SoilCell.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/Matrix.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/cell/BaseCell.scala",
+		"/C/Users/trit/Documents/Processing/unitroTest/test1/test1.pde",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/Drawer.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/Env.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/Solver.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/unitro.scala",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites_pri4/meteorites_pri4.pde",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/EasyProcessing/EasyProcessing.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/easyLWJGL/easyLWJGL.scala",
+		"/C/Users/trit/Documents/Processing/SandBox/kirin3/kirin3.pde",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/cell/PlantCell.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/Matrix",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/cell/plant.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/cell/soil.scala",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/cell/soil",
+		"/C/Users/trit/Documents/Program/unitro/build/Build.scala",
+		"/C/Users/trit/Documents/Program/unitro/build.sbt",
+		"/C/Users/trit/Documents/Program/unitro/Build.scala",
+		"/C/Users/trit/AppData/Roaming/Sublime Text 2/Packages/User/scala.sublime-build",
+		"/C/Users/trit/Documents/Program/unitro/main.sublime-workspace",
+		"/C/Users/trit/Documents/Program/unitro/main.sublime-project",
+		"/C/Users/trit/Documents/Program/unitro/src/main/scala/core.scala",
+		"/C/Users/trit/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/C/Users/trit/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/trit/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/trit/Downloads/tweets/data/js/tweets/2011_08.js",
+		"/C/Users/trit/Downloads/tweets/data/js/tweets/2010_05.js",
+		"/C/Users/trit/Downloads/tweets/tweets.txt",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites100/meteorites100.pde",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites_pri/meteorites_pri.html",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites_pri/meteorites_pri.pjs",
+		"/C/Users/trit/Documents/カンファ参加グラフkansai.txt",
+		"/C/Users/trit/Documents/カンファ参加グラフ.txt",
+		"/C/Users/trit/Downloads/Crawling Chaos.htm",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites50/application.windows64/meteorites50.bat",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites/meteorites_pri/meteorites_pri.pjs.pde",
+		"/C/Users/trit/Downloads/Orbit1.1/Orbit/Orbit.rcd",
+		"/C/Users/trit/Downloads/Orbit1.1/Orbit/AroundAntiGravityPlanet.lua",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites50/meteorites50.pde",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites150/meteorites150.pde",
+		"/C/Users/trit/Documents/Processing/SandBox/meteorites100/meteorites100.pde",
+		"/C/Users/trit/AppData/Roaming/Sublime Text 2/Packages/Processing/Processing.sublime-build",
+		"/C/Users/trit/Documents/Processing/SandBox/test_001/test_001.pde",
+		"/G/RigidChips/RC15B26/lib/ttata/Spine/brunches/core.lua",
+		"/G/RigidChips/RC15B26/lib/ttata/trit_Component/TCS_typeR.lua",
+		"/F/Users/tanitta/Documents/sbt.bat",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Lua Dev/Lua.sublime-build",
+		"/F/Users/tanitta/Documents/Program/unitro/brunches/frame.scala",
+		"/F/Users/tanitta/Documents/Program/ScalaTest.scala",
+		"/F/Users/tanitta/Documents/Program/unitro/brunches/Environment.scala",
+		"/F/Users/tanitta/Documents/Program/unitro/brunches/Drons.scala",
+		"/G/卒研/[G]rx28_speedcheck.c",
+		"/F/Users/tanitta/Documents/Program/kosenconf/main.lua",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/User/scala.sublime-build",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/User/vcxproj.sublime-build",
+		"/F/Users/tanitta/Documents/Program/kosenconf/analyzer.lua",
+		"/F/Users/tanitta/Documents/Program/kosenconf/encodetestlist.lua",
+		"/F/Users/tanitta/Documents/Program/Encodetest.txt",
+		"/F/Users/tanitta/Documents/Program/kosenconf/donai.lua",
+		"/F/Users/tanitta/Documents/Program/kosenconf/other.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/3DObject8.lua",
+		"/F/Users/tanitta/Documents/Program/kosenconf/dogai.lua",
+		"/F/Users/tanitta/Documents/Program/kosenconf/data.lua",
+		"/F/Users/tanitta/Documents/Program/unitro/source/frame.scala",
+		"/F/Users/tanitta/Documents/Program/unitro/source/environment.scala",
+		"/F/Users/tanitta/Documents/Program/unitro/source/main.scala",
+		"/F/Users/tanitta/Documents/Program/unitro/source/fps.scala",
+		"/F/Users/tanitta/Documents/Program/kosenconf/raw.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/Model/TRP31_3/brunches/core.lua",
+		"/F/Users/tanitta/Documents/Program/Wordsorter/Wordsorter.lua",
+		"/F/Users/tanitta/Documents/Program/Wordsorter/output.txt",
+		"/F/RigidChips/RC15B26/Data/Chips/2-民間陸輸用/0-レース用の自動車/Sorceress/P2001_trit_Sorceress_type_R_400.rcd",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/C++/C++.sublime-build",
+		"/F/RigidChips/RC15B26/lib/ttata/Model/Sorceress/300/TM4_005.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/Model/Sorceress/Sorceress.sublime-project",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/examples/3d/normalsExample/src/testApp.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/examples/3d/normalsExample/src/main.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/examples/3d/easyCamExample/src/testApp.h",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/examples/3d/easyCamExample/src/main.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/examples/3d/easyCamExample/src/testApp.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/unitro/unMain.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/main.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/unitro/unSoil.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/unitro.vcxproj",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/unitro/unWater.cpp",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/unitro/unWater.h",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/unitro/unMain.h",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/unitro/unSoil.h",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/loader.h",
+		"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/src/loader.cpp",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/SublimeLinter/sublimelinter/modules/lua.py",
+		"/F/RigidChips/RC15B26/lib/ttata/Spine/brunches/core.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/Graphics/brunches/Smirnoff.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/Input/brunches/Keyboard.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/Spine/loader.lua",
+		"/F/RigidChips/RC15B26/lib/ttata/Spine/Spine.sublime-workspace",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Theme - Soda/Soda Dark.sublime-theme",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Lua/class.sublime-snippet",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Lua/metamethod.sublime-snippet",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Lua/method.sublime-snippet",
+		"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/Lua/namespace.sublime-snippet"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"conBomb/(128.*1.5)",
+			"return true}",
+			"+      ",
+			"//	 1 つめの頂点の座標を指定する",
+			"	Mtx",
+			"mass",
+			"  ",
+			"      ",
+			"     ",
+			"    ",
+			"   ",
+			"  ",
+			"Buffer",
+			"mtxSoil",
+			"SizZone",
+			"mass)",
+			"2,",
+			"  ",
+			"            ",
+			"           ",
+			"          ",
+			"         ",
+			"        ",
+			"       ",
+			"      ",
+			"     ",
+			"    ",
+			"   ",
+			"  ",
+			"init",
+			"/2",
+			"N",
+			"n",
+			"N",
+			"n",
+			"	",
+			"width",
+			"SetVer",
+			"Mass",
+			"PosY",
+			"PosX",
+			"	",
+			"]],",
+			"affiliation2=[[",
+			"\"",
+			"]]}",
+			"[[",
+			"]], ",
+			"affiliation2=",
+			"strFilename",
+			"strmemo",
+			":  ",
+			": ",
+			"unMain",
+			"meta",
+			"class",
+			"namespace"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"\\t",
+			"a",
+			"",
+			"strFileName",
+			"strMemo"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 249.0
+	},
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"plant",
+				"src/main/scala/cell/plant.scala"
+			],
+			[
+				"soil",
+				"src/main/scala/cell/soil.scala"
+			],
+			[
+				"unitro",
+				"src/main/scala/unitro.scala"
+			],
+			[
+				"main",
+				"main.cpp"
+			],
+			[
+				"x",
+				"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/unitro.vcxproj"
+			],
+			[
+				"pro",
+				"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/unitro.vcxproj"
+			],
+			[
+				"buil",
+				"/C/Users/tanitta/AppData/Roaming/Sublime Text 2/Packages/User/vcxproj.sublime-build"
+			],
+			[
+				"",
+				"untitled"
+			],
+			[
+				"pr",
+				"/F/Users/tanitta/Documents/Program/of_v0072_vs2010_release/apps/myApps/unitro/unitro.vcxproj"
+			],
+			[
+				"sumir",
+				"Graphics/brunches/Smirnoff.lua"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 361.0,
+	"status_bar_visible": true
+}
