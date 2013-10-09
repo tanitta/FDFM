@@ -1,4 +1,5 @@
 package	tanitta.matrix
-object Matrix {
+object triMat{
 	
 }
+
