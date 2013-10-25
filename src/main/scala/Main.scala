@@ -2,7 +2,7 @@ import tanitta.matrix._
 import Jama.Matrix
 
 
-object Main{
+object Main{ 
 	def set4x4(in: Array[Double]): Array[Array[Double]] = {
 		var a = Array.ofDim[Double](4, 4)
 		for(i <- 0 to a.size-1; j <- 0 to a(0).size-1){
