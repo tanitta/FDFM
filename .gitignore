@@ -1,6 +1,7 @@
 lib/
 target/
 project/
+src/main/java/
 *.log
 *.sublime-workspace
 *.sublime-project

@@ -52,11 +52,13 @@ object DrawerField{
 				ps.line(-size,0,i,size,0,i)
 			}
 			ps.strokeWeight(4)	  
-			ps.stroke(0, 100, 100)
+			ps.stroke(0, 100, 100,32)
 			ps.line(0,0,0,1,0,0)
-			ps.stroke(100/3, 100, 100)
+			
+			ps.stroke(100/3, 100, 100,32)
 			ps.line(0,0,0,0,1,0)
-			ps.stroke(100/3*2, 100, 100)
+			
+			ps.stroke(100/3*2, 100, 100, 32)
 			ps.line(0,0,0,0,0,1)
 		}
 	}
