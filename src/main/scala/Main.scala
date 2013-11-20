@@ -19,8 +19,8 @@ object Main extends processing.core.PApplet {
 	override def draw(){
 		update
 		
-		solver.draw
 		drawer.draw
+		solver.draw
 	}
 	
 	def main(args: Array[String]){
