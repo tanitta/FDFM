@@ -3,7 +3,7 @@ import processing.core._
 import trit.fdfm._
 object DrawerField{
 	class Camera(var ps:PApplet){
-		var fov = 0.05f		
+		var fov = 0.04f		
 		var rotate = 0.0
 		
 		var ax = 0.0f
@@ -35,18 +35,18 @@ object DrawerField{
 		def setup = {
 			ps.size(Env.General.sizScreenX,Env.General.sizScreenY,PConstants.OPENGL)
 			ps.colorMode(PConstants.HSB, 100)
-			ps.background(0,0,100)
+			ps.background(0,0,0)
 			ps.smooth()
 		}
 		def update = {}
 		def draw = {
 			ps.strokeWeight(1)
-			ps.background(0,0,100);
+			ps.background(0,0,0);
 			this.camera.update
 			ps.stroke(50)
 			//ps.box(1);
 			var size = 10
-			ps.stroke(0,0,0,30)
+			ps.stroke(0,0,100,30)
 			for(i <- -size to size){
 				ps.line(i.toFloat/size.toFloat,0,-size.toFloat/size.toFloat,i.toFloat/size.toFloat, 0,size.toFloat/size.toFloat)
 				ps.line(-size.toFloat/size.toFloat,0,i.toFloat/size.toFloat, size.toFloat/size.toFloat,0,i.toFloat/size.toFloat)

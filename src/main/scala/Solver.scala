@@ -2,112 +2,13 @@ package trit.fdfm
 
 import processing.core._
 import Jama.Matrix
+import trit.fdfm._
 
 
 object SolverField{
 	var L1:Double = 0.5
 	var L2:Double = 0.5
 	var counter:Int = 0
-
-	var dataElbow = Array(
-		Array(0.0425,-0.0386,-0.3498),
-		Array(0.0434,-0.0346,-0.3499),
-		Array(0.0468,-0.0393,-0.3491),
-		Array(0.0477,-0.0353,-0.3477),
-		Array(0.0519,-0.0359,-0.3462),
-		Array(0.0574,-0.0409,-0.3454),
-		Array(0.0616,-0.0415,-0.3439),
-		Array(0.0655,-0.0337,-0.3411),
-		Array(0.0719,-0.0346,-0.3404),
-		Array(0.0790,-0.0310,-0.3400),
-		Array(0.0854,-0.0322,-0.3377),
-		Array(0.0948,-0.0292,-0.3341),
-		Array(0.1055,-0.0311,-0.3304),
-		Array(0.1149,-0.0283,-0.3260),
-		Array(0.1252,-0.0213,-0.3202),
-		Array(0.1378,-0.0147,-0.3144),
-		Array(0.1525,-0.0086,-0.3071),
-		Array(0.1643,-0.0067,-0.2987),
-		Array(0.1769,-0.0001,-0.2921),
-		Array(0.1899,-0.0029,-0.2828),
-		Array(0.2036,0.0077,-0.2716),
-		Array(0.2143,0.0140,-0.2617),
-		Array(0.2271,0.0200,-0.2510),
-		Array(0.2369,0.0222,-0.2410),
-		Array(0.2467,0.0240,-0.2301),
-		Array(0.2575,0.0304,-0.2185),
-		Array(0.2661,0.0460,-0.2061),
-		Array(0.2728,0.0439,-0.1958),
-		Array(0.2805,0.0552,-0.1848),
-		Array(0.2850,0.0624,-0.1730),
-		Array(0.2894,0.0700,-0.1642),
-		Array(0.2950,0.0726,-0.1532),
-		Array(0.2986,0.0754,-0.1427),
-		Array(0.3009,0.0830,-0.1322),
-		Array(0.3044,0.0952,-0.1225),
-		Array(0.3068,0.0938,-0.1129),
-		Array(0.3080,0.1065,-0.1038),
-		Array(0.3094,0.1006,-0.0950),
-		Array(0.3095,0.1090,-0.0876),
-		Array(0.3107,0.1222,-0.0816),
-		Array(0.3108,0.1217,-0.0776),
-		Array(0.3110,0.1303,-0.0717),
-		Array(0.3100,0.1347,-0.0683),
-		Array(0.3101,0.1343,-0.0658),
-		Array(0.3090,0.1390,-0.0641),
-		Array(0.3080,0.1435,-0.0614),
-		Array(0.3113,0.1382,-0.0600)
-	)
-
-	var dataHand = Array(
-		Array(0.2375, 0.0706, -0.1573),
-		Array(0.2396, 0.0705, -0.1574),
-		Array(0.2407, 0.0747, -0.1566),
-		Array(0.2429, 0.0653, -0.1552),
-		Array(0.2440, 0.0694, -0.1527),
-		Array(0.2451, 0.0736, -0.1503),
-		Array(0.2461, 0.0779, -0.1487),
-		Array(0.2483, 0.0862, -0.1438),
-		Array(0.2526, 0.0853, -0.1415),
-		Array(0.2549, 0.0844, -0.1360),
-		Array(0.2572, 0.0836, -0.1312),
-		Array(0.2616, 0.0915, -0.1247),
-		Array(0.2659, 0.0994, -0.1183),
-		Array(0.2703, 0.1073, -0.1110),
-		Array(0.2748, 0.1060, -0.1038),
-		Array(0.2803, 0.1183, -0.0964),
-		Array(0.2859, 0.1212, -0.0876),
-		Array(0.2904, 0.1289, -0.0777),
-		Array(0.2960, 0.1410, -0.0669),
-		Array(0.3038, 0.1435, -0.0565),
-		Array(0.3094, 0.1558, -0.0464),
-		Array(0.3184, 0.1600, -0.0329),
-		Array(0.3252, 0.1604, -0.0213),
-		Array(0.3298, 0.1871, -0.0104),
-		Array(0.3388, 0.1943, 0.0004),
-		Array(0.3478, 0.2112, 0.0109),
-		Array(0.3535, 0.2145, 0.0204),
-		Array(0.3615, 0.2167, 0.0315),
-		Array(0.3684, 0.2343, 0.0406),
-		Array(0.3753, 0.2520, 0.0490),
-		Array(0.3821, 0.2600, 0.0568),
-		Array(0.3900, 0.2632, 0.0635),
-		Array(0.3968, 0.2716, 0.0680),
-		Array(0.4028, 0.2950, 0.0743),
-		Array(0.4119, 0.3031, 0.0797),
-		Array(0.4211, 0.3215, 0.0840),
-		Array(0.4268, 0.3254, 0.0875),
-		Array(0.4347, 0.3290, 0.0901),
-		Array(0.4406, 0.3431, 0.0934),
-		Array(0.4463, 0.3473, 0.0944),
-		Array(0.4520, 0.3514, 0.0962),
-		Array(0.4533, 0.3562, 0.0974),
-		Array(0.4557, 0.3659, 0.0979),
-		Array(0.4590, 0.3605, 0.0975),
-		Array(0.4602, 0.3653, 0.0986),
-		Array(0.4614, 0.3702, 0.0989),
-		Array(0.4637, 0.3697, 0.0997)
-	)
 
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 
@@ -168,11 +69,11 @@ object SolverField{
 		def setup = {}
 		
 		def getL1(index:Int):Double = {
-			math.pow(math.pow(dataElbow(index)(0),2.0)+math.pow(dataElbow(index)(1),2.0)+math.pow(dataElbow(index)(2),2.0),0.5)
+			math.pow(math.pow(Data.dataElbow(index)(0),2.0)+math.pow(Data.dataElbow(index)(1),2.0)+math.pow(Data.dataElbow(index)(2),2.0),0.5)
 		}
 		
 		def getL2(index:Int):Double = {
-			math.pow(math.pow(dataElbow(index)(0)-dataHand(index)(0),2.0)+math.pow(dataElbow(index)(1)-dataHand(index)(1),2.0)+math.pow(dataElbow(index)(2)-dataHand(index)(2),2.0),0.5)
+			math.pow(math.pow(Data.dataElbow(index)(0)-Data.dataHand(index)(0),2.0)+math.pow(Data.dataElbow(index)(1)-Data.dataHand(index)(1),2.0)+math.pow(Data.dataElbow(index)(2)-Data.dataHand(index)(2),2.0),0.5)
 		}
 		
 		def solve(t1:Double,t2:Double,t3:Double,t4:Double,l1:Double,l2:Double) = {
@@ -197,16 +98,16 @@ object SolverField{
 			// var T0d = Td0.inverse()
 			
 			posVectorElbow = new Jama.Matrix(Array(
-				Array(dataElbow(index)(0)),
-				Array(-dataElbow(index)(2)),
-				Array(dataElbow(index)(1)),
+				Array(Data.dataElbow(index)(0)),
+				Array(-Data.dataElbow(index)(2)),
+				Array(Data.dataElbow(index)(1)),
 				Array(1.0)
 			),4,1)
 			
 			posVectorHand = new Jama.Matrix(Array(
-				Array(dataHand(index)(0)),
-				Array(-dataHand(index)(2)),
-				Array(dataHand(index)(1)),
+				Array(Data.dataHand(index)(0)),
+				Array(-Data.dataHand(index)(2)),
+				Array(Data.dataHand(index)(1)),
 				Array(1.0)
 			),4,1)
 			
@@ -223,19 +124,18 @@ object SolverField{
 			theta(3) = math.atan(posVectorHand2.get(1,0)/posVectorHand2.get(0,0))
 			
 			var rXY2 = math.pow(math.pow(posVectorHand2.get(0,0),2.0)+math.pow(posVectorHand2.get(1,0),2.0),0.5)
-			theta(4) = -math.atan2(-posVectorHand2.get(2,0)-getL2(index),rXY2)
+			theta(4) = math.atan2(posVectorHand2.get(2,0)+getL1(index),rXY2)
 		}
 		
 		def update = {
 			
 			if(ps.keyPressed){
-				if(ps.key == 'a' && counter < dataElbow.length-1){
+				if(ps.key == 'a' && counter < Data.dataElbow.length-1){
 					counter += 1 
 				}else if(ps.key == 'z' && counter > 0){
 					counter -= 1 
 				}
 			}
-			println(ps.key)
 			IK4(counter)
 			solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
 			
@@ -389,14 +289,14 @@ object SolverField{
 		
 		def draw = {
 			ps.strokeWeight(4)	 
-			for(i <- 0 to dataElbow.length-1){
-				ps.stroke(i.toFloat/dataElbow.length.toFloat*100f, 100, 100, 32)
-				ps.point(dataElbow(i)(0).toFloat, -dataElbow(i)(2).toFloat, dataElbow(i)(1).toFloat)
-				ps.point(dataHand(i)(0).toFloat, -dataHand(i)(2).toFloat, dataHand(i)(1).toFloat)
+			for(i <- 0 to Data.dataElbow.length-1){
+				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 100, 100)
+				ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
 			}
 			ps.strokeWeight(2)	  
-			ps.stroke(0, 0, 0)
+			ps.stroke(0, 0, 100)
 			ps.line(0,0,0,posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
 			ps.line(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat,
 			posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
@@ -407,7 +307,7 @@ object SolverField{
 			drawAxis4
 			
 			ps.strokeWeight(8)
-			ps.stroke(0, 0, 0)	  
+			ps.stroke(0, 0, 100)	  
 			ps.point(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
 			ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
 			
