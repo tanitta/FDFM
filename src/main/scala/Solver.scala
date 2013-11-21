@@ -6,10 +6,10 @@ import trit.fdfm._
 
 
 object SolverField{
-	var L1:Double = 0.5
-	var L2:Double = 0.5
+	var L1:Double = 0.29
+	var L2:Double = 0.3
 	var counter:Int = 0
-
+	var time:Double = 0.0
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 
 		var tmz = new Matrix(Array(
@@ -76,6 +76,10 @@ object SolverField{
 			math.pow(math.pow(Data.dataElbow(index)(0)-Data.dataHand(index)(0),2.0)+math.pow(Data.dataElbow(index)(1)-Data.dataHand(index)(1),2.0)+math.pow(Data.dataElbow(index)(2)-Data.dataHand(index)(2),2.0),0.5)
 		}
 		
+		//solve
+		//順運動学により各関節角度と長さから関節角度を計算する
+		//parameter: t1~t4:各関節角, l1,l2:腕の長さ
+		//return: Unit
 		def solve(t1:Double,t2:Double,t3:Double,t4:Double,l1:Double,l2:Double) = {
 			
 			
@@ -94,6 +98,9 @@ object SolverField{
 			posVectorHand = T04.times(collumVector)
 		}
 		
+		//IK4: 逆運動学によりDataの実測座標値から各関節角度を計算する
+		//parameter: Data.data index
+		//return: Unit
 		def IK4(index:Int) = {
 			// var T0d = Td0.inverse()
 			
@@ -127,6 +134,12 @@ object SolverField{
 			theta(4) = math.atan2(posVectorHand2.get(2,0)+getL1(index),rXY2)
 		}
 		
+		def PTPSolver = {
+			for( i <- 1 to 4) {
+				theta(i) += Data.PTPParameters(i).getVel(time)*Data.unitTime
+			}
+		}
+		
 		def update = {
 			
 			if(ps.keyPressed){
@@ -136,8 +149,9 @@ object SolverField{
 					counter -= 1 
 				}
 			}
-			IK4(counter)
-			solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
+			// IK4(counter)
+			// PTPSolver()
+			solve(theta(1),theta(2),theta(3),theta(4),L1,L2)
 			
 		}
 				
@@ -289,12 +303,12 @@ object SolverField{
 		
 		def draw = {
 			ps.strokeWeight(4)	 
-			for(i <- 0 to Data.dataElbow.length-1){
-				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 100, 100)
-				ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// for(i <- 0 to Data.dataElbow.length-1){
+			// 	ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 100, 100)
+			// 	ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			// 	ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
-			}
+			// }
 			ps.strokeWeight(2)	  
 			ps.stroke(0, 0, 100)
 			ps.line(0,0,0,posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)

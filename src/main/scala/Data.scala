@@ -1,5 +1,35 @@
 package trit.fdfm
 object Data{
+	var tf = 10.0
+	var at = 0.05
+	class PTPParameter(var start:Double, var stop:Double){
+		var thetaD = this.start-this.stop
+		var sigmaMax = this.thetaD/(Data.tf-Data.at)
+		def getVel(t: Double):Double = {
+			var sigma:Double = 0.0
+			if(0.0 <= t && t < Data.at){
+				sigma = sigmaMax/Data.at*t	
+			}
+			if(Data.at <= t && t< Data.tf-Data.at){
+				sigma = sigmaMax
+			}
+			if(Data.tf-Data.at <= t && t <= Data.tf){
+				sigma = -sigmaMax/Data.at*t + sigmaMax/Data.at*Data.tf
+			}
+			sigma
+		}
+	} 
+	var PTPParameters = new Array[PTPParameter](5)
+	PTPParameters(0) = new PTPParameter(0.0,0.0)
+	PTPParameters(1) = new PTPParameter(0.0,0.5)
+	PTPParameters(2) = new PTPParameter(0.0,0.0)
+	PTPParameters(3) = new PTPParameter(0.0,0.0)
+	PTPParameters(4) = new PTPParameter(0.0,0.0)
+	
+	
+	
+	
+	
 	var dataElbow = Array(
 		Array(0.0425,-0.0386,-0.3498),
 		Array(0.0434,-0.0346,-0.3499),
