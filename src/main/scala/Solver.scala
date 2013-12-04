@@ -65,9 +65,6 @@ object SolverField{
 			Array(1.0)
 		),4,1)
 		
-		
-		def setup = {}
-		
 		def getL1(index:Int):Double = {
 			math.pow(math.pow(Data.dataElbow(index)(0),2.0)+math.pow(Data.dataElbow(index)(1),2.0)+math.pow(Data.dataElbow(index)(2),2.0),0.5)
 		}
@@ -134,23 +131,33 @@ object SolverField{
 			theta(4) = math.atan2(posVectorHand2.get(2,0)+getL1(index),rXY2)
 		}
 		
-		def PTPSolver = {
+		def PTPSolver(t:Double) = {
 			for( i <- 1 to 4) {
-				theta(i) += Data.PTPParameters(i).getVel(time)*Data.unitTime
+				theta(i) = -Data.PTPParameters(i).getAng(t)
 			}
+		}
+		
+		def setup = {
+			// IK4(Data.dataElbow.length-1)
+			// // PTPSolver(10.0)
+			// solve(theta(1),theta(2),theta(3),theta(4),L1,L2)
+			// println("theta1:" + theta(1))
+			// println("theta2:" + theta(2))
+			// println("theta3:" + theta(3))
+			// println("theta4:" + theta(4))
 		}
 		
 		def update = {
 			
 			if(ps.keyPressed){
-				if(ps.key == 'a' && counter < Data.dataElbow.length-1){
+				if(ps.key == 'a' && counter < Data.stepMax-1){
 					counter += 1 
 				}else if(ps.key == 'z' && counter > 0){
 					counter -= 1 
 				}
 			}
 			// IK4(counter)
-			// PTPSolver()
+			PTPSolver(counter.toDouble*Data.unitTime)
 			solve(theta(1),theta(2),theta(3),theta(4),L1,L2)
 			
 		}

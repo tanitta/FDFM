@@ -2,9 +2,12 @@ package trit.fdfm
 object Data{
 	var tf = 10.0
 	var at = 0.05
+	var unitTime = 0.1
+	var stepMax:Int = (tf/unitTime).toInt
 	class PTPParameter(var start:Double, var stop:Double){
 		var thetaD = this.start-this.stop
 		var sigmaMax = this.thetaD/(Data.tf-Data.at)
+		var angle = start
 		def getVel(t: Double):Double = {
 			var sigma:Double = 0.0
 			if(0.0 <= t && t < Data.at){
@@ -18,17 +21,30 @@ object Data{
 			}
 			sigma
 		}
+		
+		def getAng(t: Double):Double = {
+			angle = start
+			for( step <- 0 to (t/unitTime).toInt) {
+				var lTime:Double = step.toDouble/stepMax*tf
+				angle += this.getVel(lTime)*unitTime
+			}
+			angle
+		}
+		
 	} 
 	var PTPParameters = new Array[PTPParameter](5)
 	PTPParameters(0) = new PTPParameter(0.0,0.0)
-	PTPParameters(1) = new PTPParameter(0.0,0.5)
-	PTPParameters(2) = new PTPParameter(0.0,0.0)
-	PTPParameters(3) = new PTPParameter(0.0,0.0)
-	PTPParameters(4) = new PTPParameter(0.0,0.0)
-	
-	
-	
-	
+	PTPParameters(1) = new PTPParameter(1.4498909296037423,0.19040526232806004)
+	PTPParameters(2) = new PTPParameter(4.821497153141927,4.301304120297498)
+	PTPParameters(3) = new PTPParameter(-1.1761145836049476,-0.8457694650137504)
+	PTPParameters(4) = new PTPParameter(0.6498283709082613,-0.6833951511814054)
+
+	// PTPParameters(0) = new PTPParameter(0.0,0.0)
+	// PTPParameters(1) = new PTPParameter(0.0,math.Pi*0.5)
+	// PTPParameters(2) = new PTPParameter(0.0,0.0)
+	// PTPParameters(3) = new PTPParameter(0.0,0.0)
+	// PTPParameters(4) = new PTPParameter(0.0,0.0)
+
 	
 	var dataElbow = Array(
 		Array(0.0425,-0.0386,-0.3498),
