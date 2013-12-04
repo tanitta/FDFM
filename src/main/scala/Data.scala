@@ -1,11 +1,11 @@
 package trit.fdfm
 object Data{
-	var tf = 10.0
+	var tf = 1.0/60.0*47.0
 	var at = 0.05
-	var unitTime = 0.1
+	var unitTime = 1.0/60.0
 	var stepMax:Int = (tf/unitTime).toInt
 	class PTPParameter(var start:Double, var stop:Double){
-		var thetaD = this.start-this.stop
+		var thetaD = this.stop-this.start
 		var sigmaMax = this.thetaD/(Data.tf-Data.at)
 		var angle = start
 		def getVel(t: Double):Double = {

@@ -133,18 +133,19 @@ object SolverField{
 		
 		def PTPSolver(t:Double) = {
 			for( i <- 1 to 4) {
-				theta(i) = -Data.PTPParameters(i).getAng(t)
+				theta(i) = Data.PTPParameters(i).getAng(t)
 			}
 		}
 		
 		def setup = {
-			// IK4(Data.dataElbow.length-1)
-			// // PTPSolver(10.0)
-			// solve(theta(1),theta(2),theta(3),theta(4),L1,L2)
-			// println("theta1:" + theta(1))
-			// println("theta2:" + theta(2))
-			// println("theta3:" + theta(3))
-			// println("theta4:" + theta(4))
+			// PTPSolver(10.0)
+			for( i <- 0 to Data.stepMax-1) {
+				//IK4(i)
+				PTPSolver(i.toDouble*Data.unitTime)
+				solve(theta(1),theta(2),theta(3),theta(4),L1,L2)
+				println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
+			}
+			println("\n")
 		}
 		
 		def update = {
@@ -310,12 +311,12 @@ object SolverField{
 		
 		def draw = {
 			ps.strokeWeight(4)	 
-			// for(i <- 0 to Data.dataElbow.length-1){
-			// 	ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 100, 100)
-			// 	ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-			// 	ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			for(i <- 0 to Data.dataElbow.length-1){
+				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 100, 100)
+				ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
-			// }
+			}
 			ps.strokeWeight(2)	  
 			ps.stroke(0, 0, 100)
 			ps.line(0,0,0,posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
