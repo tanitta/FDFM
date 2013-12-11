@@ -138,18 +138,18 @@ object SolverField{
 		}
 		
 		def setup = {
-			// println("Elbow")
-			// for( i <- 0 to Data.stepMax-1) {
-			// 	PTPSolver(i*Data.unitTime)
-			// 	solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
-			// 	println(posVectorElbow.get(0,0) + "\t" + posVectorElbow.get(1,0) + "\t" + posVectorElbow.get(2,0))
-			// }
-			// println("Hand")
-			// for( i <- 0 to Data.stepMax-1) {
-			// 	PTPSolver(i*Data.unitTime)
-			// 	solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
-			// 	println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
-			// }
+			println("Elbow")
+			for( i <- 0 to Data.stepMax-1) {
+				PTPSolver(i*Data.unitTime)
+				solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
+				println(posVectorElbow.get(0,0) + "\t" + posVectorElbow.get(1,0) + "\t" + posVectorElbow.get(2,0))
+			}
+			println("Hand")
+			for( i <- 0 to Data.stepMax-1) {
+				PTPSolver(i*Data.unitTime)
+				solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
+				println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
+			}
 			
 			// println("ExElbow")
 			// for( i <- 0 to Data.stepMax-1) {
@@ -161,6 +161,13 @@ object SolverField{
 			// 	println(Data.dataHand(i)(0) + "\t" + -Data.dataHand(i)(2) + "\t" + Data.dataHand(i)(1))
 			// }
 			
+			// IK4(0)
+			// println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
+			// IK4(46)
+			// println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
+			for( i <- 0 to 46) {
+				// println(Data.PTPParameters(3).getVel(i*Data.unitTime))
+			}
 			
 		}
 		

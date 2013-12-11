@@ -1,34 +1,54 @@
 package trit.fdfm
 object Data{
-	var tf = 1.0/60.0*47.0
 	var at = 0.05
 	var unitTime = 1.0/60.0
+	var tf = unitTime*46.0
 	var stepMax:Int = (tf/unitTime).toInt
 	class PTPParameter(var start:Double, var stop:Double){
 		var thetaD = this.stop-this.start
 		var sigmaMax = this.thetaD/(Data.tf-Data.at)
 		var angle = start
+		
 		def getVel(t: Double):Double = {
 			var sigma:Double = 0.0
 			if(0.0 <= t && t < Data.at){
 				sigma = sigmaMax/Data.at*t	
 			}
-			if(Data.at <= t && t< Data.tf-Data.at){
+			if(Data.at <= t && t<= Data.tf-Data.at){
 				sigma = sigmaMax
 			}
-			if(Data.tf-Data.at <= t && t <= Data.tf){
+			if(Data.tf-Data.at < t && t <= Data.tf){
 				sigma = -sigmaMax/Data.at*t + sigmaMax/Data.at*Data.tf
 			}
 			sigma
 		}
 		
+		// def getAng(t: Double):Double = {
+		// 	angle = start
+			
+		// 	for( step <- 0 to (t/unitTime).toInt) {
+		// 		var lTime:Double = step.toDouble/(tf/unitTime)*tf
+		// 		angle += this.getVel(lTime)*unitTime
+		// 	}
+		// 		angle += this.getVel(tf)*unitTime
+			
+		// 	angle
+		// }
+		
 		def getAng(t: Double):Double = {
-			angle = start
-			for( step <- 0 to (t/unitTime).toInt) {
-				var lTime:Double = step.toDouble/stepMax*tf
-				angle += this.getVel(lTime)*unitTime
+			var sigma:Double = 0.0
+			var angle:Double = start
+			if(0.0 <= t && t < Data.at){
+					angle = getVel(t)*t*0.5
 			}
-			angle
+			if(Data.at <= t && t< Data.tf-Data.at){
+					angle = sigmaMax*at*0.5 + getVel(t)*(t-at)
+			}
+			if(Data.tf-Data.at <= t && t < Data.tf){
+				angle = sigmaMax*at*0.5 + sigmaMax*(tf-at) - getVel(t)*(t-(tf-at))*0.5
+				
+			}
+			angle + start
 		}
 		
 	} 
