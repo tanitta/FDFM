@@ -335,9 +335,12 @@ object SolverField{
 				 
 			for(i <- 0 to Data.dataElbow.length-1){
 				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+				
 				ps.strokeWeight(10)
+				ps.fill(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
 				ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 				
+				ps.noFill()
 				ps.strokeWeight(15)
 				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
