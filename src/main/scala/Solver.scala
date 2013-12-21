@@ -4,12 +4,12 @@ import processing.core._
 import Jama.Matrix
 import trit.fdfm._
 
-
 object SolverField{
 	var L1:Double = 0.29
 	var L2:Double = 0.3
 	var counter:Int = 0
 	var time:Double = 0.0
+	
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 
 		var tmz = new Matrix(Array(
