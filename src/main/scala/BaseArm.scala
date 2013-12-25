@@ -9,6 +9,9 @@ class BaseArm(var degreeOfFreedom : Int){
 class Arm1(var degreeOfFreedom : Int) extends BaseArm {
 	var angle = new Array[Double](degreeOfFreedom)
 	
+	var L1:Double
+	var L2:Double 
+	
 	var Td0 = new Jama.Matrix(4,4)
 	var T01 = new Jama.Matrix(4,4)
 	var T12 = new Jama.Matrix(4,4)
