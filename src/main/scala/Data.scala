@@ -1,71 +1,74 @@
 package trit.fdfm
 object Data{
-	var at = 0.05
-	var unitTime = 1.0/60.0
-	var tf = unitTime*46.0
+	var at:Double = 0.05
+	var unitTime:Double = 1.0/60.0
+	var tf:Double = unitTime*47.0
 	var stepMax:Int = (tf/unitTime).toInt
-	class PTPParameter(var start:Double, var stop:Double){
-		var thetaD = this.stop-this.start
-		var sigmaMax = this.thetaD/(Data.tf-Data.at)
-		var angle = start
+	println("stepMax" + stepMax)
+	
+	class RUDC(xs:Double, xf:Double, itf:Double){
+		var tUPerTF = 0.001
+		var tUnit = itf*tUPerTF //単位時間
 		
-		def getVel(t: Double):Double = {
-			var sigma:Double = 0.0
-			if(0.0 <= t && t < Data.at){
-				sigma = sigmaMax/Data.at*t	
-			}
-			if(Data.at <= t && t<= Data.tf-Data.at){
-				sigma = sigmaMax
-			}
-			if(Data.tf-Data.at < t && t <= Data.tf){
-				sigma = -sigmaMax/Data.at*t + sigmaMax/Data.at*Data.tf
-			}
-			sigma
+		var tA:Double = 0.05 //加減速時間const
+		var tF:Double = itf //動作時間
+		
+		var xStart:Double = xs //初期値
+		var xFinish:Double = xf //終了値
+		
+		var defMax:Double = 0.0 //最大値
+		
+		def SetTUnit(itu:Double) = {
+			tUnit = itu
 		}
 		
-		// def getAng(t: Double):Double = {
-		// 	angle = start
-			
-		// 	for( step <- 0 to (t/unitTime).toInt) {
-		// 		var lTime:Double = step.toDouble/(tf/unitTime)*tf
-		// 		angle += this.getVel(lTime)*unitTime
-		// 	}
-		// 		angle += this.getVel(tf)*unitTime
-			
-		// 	angle
-		// }
-		
-		def getAng(t: Double):Double = {
-			var sigma:Double = 0.0
-			var angle:Double = start
-			if(0.0 <= t && t < Data.at){
-					angle = getVel(t)*t*0.5
-			}
-			if(Data.at <= t && t< Data.tf-Data.at){
-					angle = sigmaMax*at*0.5 + getVel(t)*(t-at)
-			}
-			if(Data.tf-Data.at <= t && t < Data.tf){
-				angle = sigmaMax*at*0.5 + sigmaMax*(tf-at) - getVel(t)*(t-(tf-at))*0.5
-				
-			}
-			angle + start
+		def TotalDef():Double = {
+			return xFinish - xStart 
 		}
 		
+		def DefMax():Double = {
+			return TotalDef/(tF-tA)	
+		}
+		
+		def Def(t: Double):Double = {
+			var d:Double = 0.0
+			if(0 <= t && t < tA){
+				d = DefMax/tA*t
+			}
+			if(tA <= t && t < tF-tA){
+				d = DefMax
+			}
+			if(tF-tA <= t && t <= tF){
+				d = -DefMax/tA*t + DefMax/tA*tF
+			}
+			return d
+		}
+			
+		def CurrentVal(t: Double):Double = {
+			var step:Double = t/tUnit
+			var counter:Double = xStart //値のカウント
+			for( i <- 0 to step.toInt) {
+				counter += Def(i.toDouble*tUnit)*tUnit
+			}
+			return counter 
+		}
+		
+		
+	}
+	
+	class PTPParameter(var start:Double, var stop:Double, var tf:Double){
+		var rudc = new Data.RUDC(start,stop,tf)
+		
+		def getAng(t:Double) = {
+			rudc.CurrentVal(t)
+		}
 	} 
 	var PTPParameters = new Array[PTPParameter](5)
-	PTPParameters(0) = new PTPParameter(0.0,0.0)
-	PTPParameters(1) = new PTPParameter(1.4498909296037423,0.19040526232806004)
-	PTPParameters(2) = new PTPParameter(4.821497153141927,4.301304120297498)
-	PTPParameters(3) = new PTPParameter(-1.1761145836049476,-0.8457694650137504)
-	PTPParameters(4) = new PTPParameter(0.6498283709082613,-0.6833951511814054)
+	PTPParameters(1) = new PTPParameter(1.4498909296037423,		0.19040526232806004,	47.0/60.0)
+	PTPParameters(2) = new PTPParameter(4.821497153141927,		4.301304120297498,		47.0/60.0)
+	PTPParameters(3) = new PTPParameter(-1.1761145836049476,	-0.8457694650137504,	47.0/60.0)
+	PTPParameters(4) = new PTPParameter(0.6498283709082613,		-0.6833951511814054,	47.0/60.0)
 
-	// PTPParameters(0) = new PTPParameter(0.0,0.0)
-	// PTPParameters(1) = new PTPParameter(0.0,math.Pi*0.5)
-	// PTPParameters(2) = new PTPParameter(0.0,0.0)
-	// PTPParameters(3) = new PTPParameter(0.0,0.0)
-	// PTPParameters(4) = new PTPParameter(0.0,0.0)
-
-	
 	var dataElbow = Array(
 		Array(0.0425,-0.0386,-0.3498),
 		Array(0.0434,-0.0346,-0.3499),

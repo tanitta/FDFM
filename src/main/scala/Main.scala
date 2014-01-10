@@ -5,15 +5,15 @@ import trit.fdfm._
 object Main extends processing.core.PApplet {
 
 	var drawer = new DrawerField.Drawer(this)
-	// var solver = new SolverField.Solver(this)	
+	var solver = new SolverField.Solver(this)	
 	override def setup(){
 		frameRate(60)
-		// solver.setup
+		solver.setup
 		drawer.setup
 	}
 	
 	def update(){
-		// solver.update
+		solver.update
 		drawer.update
 	}
 	
@@ -21,7 +21,7 @@ object Main extends processing.core.PApplet {
 		update
 		
 		drawer.draw
-		// solver.draw
+		solver.draw
 	}
 	
 	def main(args: Array[String]){
@@ -29,8 +29,8 @@ object Main extends processing.core.PApplet {
 	}
 	
  	override def sketchFullScreen():Boolean = {
- 		// return false
-		return true
+ 		return false
+		// return true
  	}
 
 	
