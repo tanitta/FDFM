@@ -4,7 +4,7 @@ import trit.fdfm._
 object DrawerField{
 	class Camera(var ps:PApplet){
 		var fov = 0.04f		
-		var rotate = -1.0f
+		var rotate = -1.0
 		
 		var ax = 0.0f
 		var ay = 0.0f
@@ -19,7 +19,7 @@ object DrawerField{
 		}
 		
 		def update = {
-			// rotate += (ps.pmouseX-ps.mouseX).toDouble*0.01
+			rotate += (ps.pmouseX-ps.mouseX).toDouble*0.01
 	 		var x:Double = 15.0*math.cos(rotate)
 	 		var z:Double = 15.0*math.sin(rotate)
 			ps.camera( x.toFloat , -10.0f, z.toFloat, // 視点X, 視点Y, 視点Z

@@ -134,22 +134,40 @@ object SolverField{
 		def PTPSolver(t:Double) = {
 			for( i <- 1 to 4) {
 				theta(i) = Data.PTPParameters(i).getAng(t)
+				// println("theta:" + i + " - " + theta(i))
 			}
 		}
 		
 		def setup = {
-			println("Elbow")
-			for( i <- 0 to Data.stepMax-1) {
-				PTPSolver(i*Data.unitTime)
-				solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
-				println(posVectorElbow.get(0,0) + "\t" + posVectorElbow.get(1,0) + "\t" + posVectorElbow.get(2,0))
+			// println("Elbow")
+			// for( i <- 0 to Data.stepMax-1) {
+			// 	PTPSolver(i*Data.unitTime)
+			// 	solve(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
+			// 	println(posVectorElbow.get(0,0) + "\t" + posVectorElbow.get(1,0) + "\t" + posVectorElbow.get(2,0))
+			// }
+			// println("Hand")
+			// for( i <- 0 to Data.stepMax-1) {
+			// 	PTPSolver(i*Data.unitTime)
+			// 	solve(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
+			// 	println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
+			// }
+			
+			println("d")
+			PTPSolver(47.0/60.0)
+			solve(theta(1),theta(2),theta(3),theta(4),getL1((Data.stepMax-1)),getL2((Data.stepMax-1)))
+			for( i <- 1 to 4) {
+				println("theta:" + i + " - " + theta(i))
 			}
-			println("Hand")
-			for( i <- 0 to Data.stepMax-1) {
-				PTPSolver(i*Data.unitTime)
-				solve(theta(1),theta(2),theta(3),theta(4),getL1(counter),getL2(counter))
-				println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
-			}
+			
+			// println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
+			var dx = posVectorHand.get(0,0)-Data.dataHand(Data.stepMax-1)(0)
+			var dy = posVectorHand.get(1,0)+Data.dataHand(Data.stepMax-1)(2)
+			var dz = posVectorHand.get(2,0)-Data.dataHand(Data.stepMax-1)(1)
+			println("dx" + dx)
+			println("dy" + dy)
+			println("dz" + dz)
+			println(math.pow(math.pow(dx,2.0)+math.pow(dy,2.0)+math.pow(dz,2.0),0.5))
+			
 			
 			// println("ExElbow")
 			// for( i <- 0 to Data.stepMax-1) {
@@ -165,10 +183,17 @@ object SolverField{
 			// println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
 			// IK4(46)
 			// println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
-			for( i <- 0 to 46) {
-				// println(Data.PTPParameters(3).getVel(i*Data.unitTime))
-			}
+			// for( i <- 0 to 46) {
+			// 	println(Data.PTPParameters(3).getVel(i*Data.unitTime))
+			// }
 			
+			// var rudc = new Data.RUDC(1.4498909296037423,		0.19040526232806004,	47.0/60.0)
+			// println("DefMax : " + rudc.DefMax)
+			
+			// // for( i <- 0 to 22){
+			// // 	println("CurrentVal : " + i + " : " + rudc.CurrentVal(i))
+			// // }
+			// println("rudc:" + rudc.CurrentVal(47.0/60.0))
 		}
 		
 		def update = {
@@ -344,11 +369,11 @@ object SolverField{
 				ps.strokeWeight(15)
 				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
-				if(i%4 == 0 ){
+				// if(i%4 == 0 ){
 					ps.strokeWeight(1)	
 					ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 					ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-				}
+				// }
 				
 				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
 				ps.strokeWeight(6)
@@ -364,7 +389,7 @@ object SolverField{
 			}
 			
 			for( i <- 0 to Data.stepMax-1) {
-				PTPSolver(i.toDouble*Data.unitTime)
+				PTPSolver(i.toDouble/60.0)
 				solve(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
 	
 				ps.stroke(0, 0, 0)	  
@@ -373,12 +398,12 @@ object SolverField{
 				ps.strokeWeight(15)
 				ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
 				
-				if(i%4 == 0 ){
+				// if(i%4 == 0 ){
 					ps.strokeWeight(1)	
 					ps.line(0,0,0,posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
 					ps.line(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat,
 					posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
-				}
+				// }
 				
 				ps.stroke(0, 0, 100)	  
 				ps.strokeWeight(6)
