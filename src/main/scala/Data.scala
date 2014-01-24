@@ -22,6 +22,10 @@ object Data{
 			tUnit = itu
 		}
 		
+		def SetTA(it: Double) = {
+			tA = it
+		}
+		
 		def TotalDef():Double = {
 			return xFinish - xStart 
 		}

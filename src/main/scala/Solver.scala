@@ -26,8 +26,6 @@ object SolverField{
 			Array(0.0,	0.0,				0.0,				1.0)
 		),4,4)
 		
-		// get(int, int) - Method in class Jama.Matrix
-		// Get a single element.
 		tmz.times(tmx) //tmz*tmx
 	}
 	
@@ -73,14 +71,11 @@ object SolverField{
 			math.pow(math.pow(Data.dataElbow(index)(0)-Data.dataHand(index)(0),2.0)+math.pow(Data.dataElbow(index)(1)-Data.dataHand(index)(1),2.0)+math.pow(Data.dataElbow(index)(2)-Data.dataHand(index)(2),2.0),0.5)
 		}
 		
-		//solve
+		//FK
 		//順運動学により各関節角度と長さから関節角度を計算する
 		//parameter: t1~t4:各関節角, l1,l2:腕の長さ
 		//return: Unit
-		def solve(t1:Double,t2:Double,t3:Double,t4:Double,l1:Double,l2:Double) = {
-			
-			
-			
+		def FK(t1:Double,t2:Double,t3:Double,t4:Double,l1:Double,l2:Double) = {	
 			Td0 = TransMat(0.0, 0.0, -math.Pi/2.0, 0.0)
 			T01 = TransMat(0.0, 0.0, -math.Pi/2.0, t1)
 			T12 = TransMat(0.0, 0.0, math.Pi/2.0, t2)
@@ -95,12 +90,10 @@ object SolverField{
 			posVectorHand = T04.times(collumVector)
 		}
 		
-		//IK4: 逆運動学によりDataの実測座標値から各関節角度を計算する
+		//IK: 逆運動学によりDataの実測座標値から各関節角度を計算する
 		//parameter: Data.data index
 		//return: Unit
-		def IK4(index:Int) = {
-			// var T0d = Td0.inverse()
-			
+		def IK(index:Int) = {	
 			posVectorElbow = new Jama.Matrix(Array(
 				Array(Data.dataElbow(index)(0)),
 				Array(-Data.dataElbow(index)(2)),
@@ -131,83 +124,19 @@ object SolverField{
 			theta(4) = math.atan2(posVectorHand2.get(2,0)+getL1(index),rXY2)
 		}
 		
+		//任意時間でのPTP制御での関節角を返す
 		def PTPSolver(t:Double) = {
 			for( i <- 1 to 4) {
 				theta(i) = Data.PTPParameters(i).getAng(t)
-				// println("theta:" + i + " - " + theta(i))
 			}
 		}
 		
 		def setup = {
-			// println("Elbow")
-			// for( i <- 0 to Data.stepMax-1) {
-			// 	PTPSolver(i*Data.unitTime)
-			// 	solve(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
-			// 	println(posVectorElbow.get(0,0) + "\t" + posVectorElbow.get(1,0) + "\t" + posVectorElbow.get(2,0))
-			// }
-			// println("Hand")
-			// for( i <- 0 to Data.stepMax-1) {
-			// 	PTPSolver(i*Data.unitTime)
-			// 	solve(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
-			// 	println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
-			// }
-			
-			println("d")
 			PTPSolver(47.0/60.0)
-			solve(theta(1),theta(2),theta(3),theta(4),getL1((Data.stepMax-1)),getL2((Data.stepMax-1)))
-			for( i <- 1 to 4) {
-				println("theta:" + i + " - " + theta(i))
-			}
-			
-			// println(posVectorHand.get(0,0) + "\t" + posVectorHand.get(1,0) + "\t" + posVectorHand.get(2,0))
-			var dx = posVectorHand.get(0,0)-Data.dataHand(Data.stepMax-1)(0)
-			var dy = posVectorHand.get(1,0)+Data.dataHand(Data.stepMax-1)(2)
-			var dz = posVectorHand.get(2,0)-Data.dataHand(Data.stepMax-1)(1)
-			println("dx" + dx)
-			println("dy" + dy)
-			println("dz" + dz)
-			println(math.pow(math.pow(dx,2.0)+math.pow(dy,2.0)+math.pow(dz,2.0),0.5))
-			
-			
-			// println("ExElbow")
-			// for( i <- 0 to Data.stepMax-1) {
-			// 	println(Data.dataElbow(i)(0) + "\t" + -Data.dataElbow(i)(2) + "\t" + Data.dataElbow(i)(1))
-			// }
-			
-			// println("ExHand")
-			// for( i <- 0 to Data.stepMax-1) {
-			// 	println(Data.dataHand(i)(0) + "\t" + -Data.dataHand(i)(2) + "\t" + Data.dataHand(i)(1))
-			// }
-			
-			// IK4(0)
-			// println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
-			// IK4(46)
-			// println(theta(1) + "\t" + theta(2) + "\t" + theta(3) + "\t" + theta(4))
-			// for( i <- 0 to 46) {
-			// 	println(Data.PTPParameters(3).getVel(i*Data.unitTime))
-			// }
-			
-			// var rudc = new Data.RUDC(1.4498909296037423,		0.19040526232806004,	47.0/60.0)
-			// println("DefMax : " + rudc.DefMax)
-			
-			// // for( i <- 0 to 22){
-			// // 	println("CurrentVal : " + i + " : " + rudc.CurrentVal(i))
-			// // }
-			// println("rudc:" + rudc.CurrentVal(47.0/60.0))
+			FK(theta(1),theta(2),theta(3),theta(4),getL1((Data.stepMax-1)),getL2((Data.stepMax-1)))
 		}
 		
 		def update = {
-			
-			if(ps.keyPressed){
-				if(ps.key == 'a' && counter < Data.stepMax-1){
-					counter += 1 
-				}else if(ps.key == 'z' && counter > 0){
-					counter -= 1 
-				}
-			}
-			// IK4(counter)
-			
-			
 		}
 				
 		def drawAxis1 = {
@@ -357,7 +286,7 @@ object SolverField{
 		}
 		
 		def draw = {
-				 
+			//Arm(データ)
 			for(i <- 0 to Data.dataElbow.length-1){
 				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
 				
@@ -387,10 +316,10 @@ object SolverField{
 				// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 				// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 			}
-			
+			//Arm(計算結果)
 			for( i <- 0 to Data.stepMax-1) {
 				PTPSolver(i.toDouble/60.0)
-				solve(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
+				FK(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
 	
 				ps.stroke(0, 0, 0)	  
 				ps.strokeWeight(10)
@@ -411,10 +340,6 @@ object SolverField{
 				ps.strokeWeight(11)
 				ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
 			}
-			
-			
-			
-			
 		}
 	}
 }
