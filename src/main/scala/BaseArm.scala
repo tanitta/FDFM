@@ -146,15 +146,23 @@ class Arm(ps: PApplet){
 		// println("theta3"+theta(3)+"\n");
 		// println("theta4"+theta(4)+"\n");
 		
-		posVectorElbow = FK(Array(0,0.1,0.1,0,0),l(1),l(2))._1;
-		posVectorHand = FK(Array(0,0.1,0.1,0,0),l(1),l(2))._2;
+		posVectorElbow = FK(Array(0.0,1.5,0.5,0.5,0),l(1),l(2))._1;
+		posVectorHand = FK(Array(0.0,1.5,0.5,0.5,0),l(1),l(2))._2;
+		
+		var thetaVz = Math.atan2(-UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(0,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
+		var thetaVx = Math.atan2(-UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(2,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
+		
+		var Tv0 = TransMat(0, 0, thetaVx, thetaVz);
+		
+		println("z : " + thetaVz);
+		println("x : " + thetaVx);
+		
 	}
 	def update() = {		
 	}
 	def draw() = {
 		armDrawer.DrawArm();
 		armDrawer.DrawAxis();
-		UnitVector(VectorProduct(posVectorElbow,posVectorHand)).print(4,4);
 		
 	}
 }
