@@ -3,17 +3,16 @@ import processing.core._
 import trit.fdfm._
 
 object Main extends processing.core.PApplet {
-
 	var drawer = new drawing.Drawer(this)
-	var solver = new calculation.Calculater(this)	
+	var calculater = new calculation.Calculater(this)	
 	override def setup(){
 		frameRate(60)
-		solver.setup
+		calculater.setup
 		drawer.setup
 	}
 	
 	def update(){
-		solver.update
+		calculater.update
 		drawer.update
 	}
 	
@@ -21,7 +20,7 @@ object Main extends processing.core.PApplet {
 		update
 		
 		drawer.draw
-		solver.draw
+		calculater.draw
 	}
 	
 	def main(args: Array[String]){
