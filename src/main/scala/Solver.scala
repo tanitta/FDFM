@@ -287,59 +287,60 @@ object SolverField{
 		
 		def draw = {
 			//Arm(データ)
-			for(i <- 0 to Data.dataElbow.length-1){
-				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			// for(i <- 0 to Data.dataElbow.length-1){
+			// 	ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
 				
-				ps.strokeWeight(10)
-				ps.fill(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
-				ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			// 	ps.strokeWeight(10)
+			// 	ps.fill(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			// 	ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 				
-				ps.noFill()
-				ps.strokeWeight(15)
-				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// 	ps.noFill()
+			// 	ps.strokeWeight(15)
+			// 	ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
-				// if(i%4 == 0 ){
-					ps.strokeWeight(1)	
-					ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-					ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-				// }
+			// 	// if(i%4 == 0 ){
+			// 		ps.strokeWeight(1)	
+			// 		ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			// 		ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// 	// }
 				
-				ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
-				ps.strokeWeight(6)
-				ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			// 	ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
+			// 	ps.strokeWeight(6)
+			// 	ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 				
-				ps.strokeWeight(11)
-				ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// 	ps.strokeWeight(11)
+			// 	ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 				
-				// ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
-				// ps.strokeWeight(16)
-				// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-				// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-			}
+			// 	// ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			// 	// ps.strokeWeight(16)
+			// 	// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			// 	// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// }
+			
 			//Arm(計算結果)
-			for( i <- 0 to Data.stepMax-1) {
-				PTPSolver(i.toDouble/60.0)
-				FK(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
+			// for( i <- 0 to Data.stepMax-1) {
+			// 	PTPSolver(i.toDouble/60.0)
+			// 	FK(theta(1),theta(2),theta(3),theta(4),getL1(i),getL2(i))
 	
-				ps.stroke(0, 0, 0)	  
-				ps.strokeWeight(10)
-				ps.point(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
-				ps.strokeWeight(15)
-				ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
+			// 	ps.stroke(0, 0, 0)	  
+			// 	ps.strokeWeight(10)
+			// 	ps.point(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
+			// 	ps.strokeWeight(15)
+			// 	ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
 				
-				// if(i%4 == 0 ){
-					ps.strokeWeight(1)	
-					ps.line(0,0,0,posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
-					ps.line(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat,
-					posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
-				// }
+			// 	// if(i%4 == 0 ){
+			// 		ps.strokeWeight(1)	
+			// 		ps.line(0,0,0,posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
+			// 		ps.line(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat,
+			// 		posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
+			// 	// }
 				
-				ps.stroke(0, 0, 100)	  
-				ps.strokeWeight(6)
-				ps.point(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
-				ps.strokeWeight(11)
-				ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
-			}
+			// 	ps.stroke(0, 0, 100)	  
+			// 	ps.strokeWeight(6)
+			// 	ps.point(posVectorElbow.get(0,0).toFloat,posVectorElbow.get(1,0).toFloat,posVectorElbow.get(2,0).toFloat)
+			// 	ps.strokeWeight(11)
+			// 	ps.point(posVectorHand.get(0,0).toFloat,posVectorHand.get(1,0).toFloat,posVectorHand.get(2,0).toFloat)
+			// }
 		}
 	}
 }

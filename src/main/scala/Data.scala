@@ -6,6 +6,7 @@ object Data{
 	var stepMax:Int = (tf/unitTime).toInt
 	println("stepMax" + stepMax)
 	
+	//台形速度制御
 	class RUDC(xs:Double, xf:Double, itf:Double){
 		var tUPerTF = 0.001
 		var tUnit = itf*tUPerTF //単位時間
@@ -60,6 +61,7 @@ object Data{
 		
 	}
 	
+	//台形制御のラッパ
 	class PTPParameter(var start:Double, var stop:Double, var tf:Double){
 		var rudc = new Data.RUDC(start,stop,tf)
 		
