@@ -4,8 +4,8 @@ import trit.fdfm._
 
 object Main extends processing.core.PApplet {
 
-	var drawer = new DrawerField.Drawer(this)
-	var solver = new SolverField.Solver(this)	
+	var drawer = new drawing.Drawer(this)
+	var solver = new calculation.Calculater(this)	
 	override def setup(){
 		frameRate(60)
 		solver.setup
