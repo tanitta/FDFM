@@ -19,14 +19,14 @@ class Arm(ps: PApplet){
 			Array(1.0)
 	),4,1)
 	//手先位置列ベクトル	
-	var posVectorHand = new Jama.Matrix(Array(
+	var P0cHand = new Jama.Matrix(Array(
 		Array(0.0),
 		Array(0.0),
 		Array(0.0),
 		Array(1.0)
 	),4,1)
 	//肘位置列ベクトル
-	var posVectorElbow = new Jama.Matrix(Array(
+	var P0cElbow = new Jama.Matrix(Array(
 		Array(0.0),
 		Array(0.0),
 		Array(0.0),
@@ -148,36 +148,36 @@ class Arm(ps: PApplet){
 		// println("theta3"+theta(3)+"\n");
 		// println("theta4"+theta(4)+"\n");
 		
-		posVectorElbow = FK(Array(0.0, 0.5,0.5,0,0),l(1),l(2))._1;
-		posVectorHand = FK(Array(0.0, 0.5,0.5,0,0),l(1),l(2))._2;
+		P0cElbow = FK(Array(0.0, 0.5,0.5,0,0),l(1),l(2))._1;
+		P0cHand = FK(Array(0.0, 0.5,0.5,0,0),l(1),l(2))._2;
 		
-		var thetaVz = Math.atan2(UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(0,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
+		var thetaVz = Math.atan2(UnitVector(VectorProduct(P0cHand,P0cElbow)).get(0,0),UnitVector(VectorProduct(P0cHand,P0cElbow)).get(1,0));
 		
-		var thetaVx = Math.atan2(UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(2,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
+		var thetaVx = Math.atan2(UnitVector(VectorProduct(P0cHand,P0cElbow)).get(2,0),UnitVector(VectorProduct(P0cHand,P0cElbow)).get(1,0));
 		println("x : " + thetaVx);
 		
-		if(UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0)<0){
-			thetaVx = thetaVx+math.Pi
-		}
+		if(UnitVector(VectorProduct(P0cHand,P0cElbow)).get(1,0) < 0){
+			thetaVx = thetaVx+math.Pi;
+		};
 		 
 		Tv0 = TransMat(0, 0, 0, thetaVz).times(TransMat(0, 0, thetaVx, 0));
 		
 		println("z : " + thetaVz);
 		println("x : " + thetaVx);
 		
-		println("Vx : "+UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(0,0))
-		println("Vy : "+UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0))
-		println("Vz : "+UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(2,0))
+		println("Vx : "+UnitVector(VectorProduct(P0cHand,P0cElbow)).get(0,0))
+		println("Vy : "+UnitVector(VectorProduct(P0cHand,P0cElbow)).get(1,0))
+		println("Vz : "+UnitVector(VectorProduct(P0cHand,P0cElbow)).get(2,0))
 		
-		var PveElbow = Tv0.times(posVectorElbow)
-		var PveHand = Tv0.times(posVectorHand)
+		var PveElbow = Tv0.times(P0cElbow)
+		var PveHand = Tv0.times(P0cHand)
 		
-		println("posVectorElbow x: " + posVectorElbow.get(0,0));
-		println("posVectorElbow y: " + posVectorElbow.get(1,0));
-		println("posVectorElbow z: " + posVectorElbow.get(2,0));
-		println("posVectorHand x: " + posVectorHand.get(0,0));
-		println("posVectorHand y: " + posVectorHand.get(1,0));
-		println("posVectorHand z: " + posVectorHand.get(2,0));
+		println("P0cElbow x: " + P0cElbow.get(0,0));
+		println("P0cElbow y: " + P0cElbow.get(1,0));
+		println("P0cElbow z: " + P0cElbow.get(2,0));
+		println("P0cHand x: " + P0cHand.get(0,0));
+		println("P0cHand y: " + P0cHand.get(1,0));
+		println("P0cHand z: " + P0cHand.get(2,0));
 		
 		println("PveElbow x: " + PveElbow.get(0,0));
 		println("PveElbow y: " + PveElbow.get(1,0));

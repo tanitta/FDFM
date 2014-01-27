@@ -5,7 +5,7 @@ import Jama.Matrix
 import trit.fdfm._
 
 class Calculater(var ps: PApplet){		
-	var cmaes = new CMAES()
+	var cmaes = new CMAES(ps)
 	var armIns = new arm.Arm(ps)
 	
 	def setup = {
@@ -317,21 +317,21 @@ class ArmDrawer(var armIns:arm.Arm, var ps: PApplet){
 
 		ps.stroke(0, 0, 0)	  
 		ps.strokeWeight(10)
-		ps.point(armIns.posVectorElbow.get(0,0).toFloat,armIns.posVectorElbow.get(1,0).toFloat,armIns.posVectorElbow.get(2,0).toFloat)
+		ps.point(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
 		ps.strokeWeight(15)
-		ps.point(armIns.posVectorHand.get(0,0).toFloat,armIns.posVectorHand.get(1,0).toFloat,armIns.posVectorHand.get(2,0).toFloat)
+		ps.point(armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
 		
 		
 		ps.strokeWeight(1)	
-		ps.line(0,0,0,armIns.posVectorElbow.get(0,0).toFloat,armIns.posVectorElbow.get(1,0).toFloat,armIns.posVectorElbow.get(2,0).toFloat)
-		ps.line(armIns.posVectorElbow.get(0,0).toFloat,armIns.posVectorElbow.get(1,0).toFloat,armIns.posVectorElbow.get(2,0).toFloat,
-		armIns.posVectorHand.get(0,0).toFloat,armIns.posVectorHand.get(1,0).toFloat,armIns.posVectorHand.get(2,0).toFloat)
+		ps.line(0,0,0,armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
+		ps.line(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat,
+		armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
 		
 		
 		ps.stroke(0, 0, 100)	  
 		ps.strokeWeight(6)
-		ps.point(armIns.posVectorElbow.get(0,0).toFloat,armIns.posVectorElbow.get(1,0).toFloat,armIns.posVectorElbow.get(2,0).toFloat)
+		ps.point(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
 		ps.strokeWeight(11)
-		ps.point(armIns.posVectorHand.get(0,0).toFloat,armIns.posVectorHand.get(1,0).toFloat,armIns.posVectorHand.get(2,0).toFloat)
+		ps.point(armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
 	}
 }

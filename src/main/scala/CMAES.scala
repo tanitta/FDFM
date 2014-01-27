@@ -7,7 +7,10 @@ import trit.fdfm._
 import fr.inria.optimization.cmaes.CMAEvolutionStrategy;
 import fr.inria.optimization.cmaes.fitness.IObjectiveFunction;
 
-class EvalByDirection extends IObjectiveFunction{
+class EvalByDirection(var ps: PApplet) extends IObjectiveFunction{
+	
+	var armObj = new arm.Arm(ps)
+	
 	override def valueOf(x:Array[Double]):Double = {
 		var res:Double = 0;
 		var a:Double = x(0)-10
@@ -28,8 +31,8 @@ class EvalByDirection extends IObjectiveFunction{
 	}
 }
 
-class CMAES() {
-	var fitfun = new EvalByDirection();
+class CMAES(var ps: PApplet) {
+	var fitfun = new EvalByDirection(ps);
 	var cma = new CMAEvolutionStrategy();
 	cma.readProperties(); // read options, see file CMAEvolutionStrategy.properties
 	cma.setDimension(3); // overwrite some loaded properties
