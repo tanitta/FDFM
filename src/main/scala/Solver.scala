@@ -5,12 +5,14 @@ import Jama.Matrix
 import trit.fdfm._
 
 class Calculater(var ps: PApplet){		
+	var cmaes = new CMAES()
 	var armIns = new arm.Arm(ps)
 	
 	def setup = {
 		// PTPSolver(47.0/60.0)
 		// FK(theta(1),theta(2),theta(3),theta(4),getL1((Data.stepMax-1)),getL2((Data.stepMax-1)))
 		armIns.setup();
+		// cmaes.Solve()
 	}
 	
 	def update = {

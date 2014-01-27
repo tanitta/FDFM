@@ -44,6 +44,8 @@ class Arm(ps: PApplet){
 	var T02 = new Jama.Matrix(4,4)
 	var T03 = new Jama.Matrix(4,4)
 	var T04 = new Jama.Matrix(4,4)
+	
+	var Tv0 = new Jama.Matrix(4,4)
 
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 		var tmz = new Matrix(Array(
@@ -146,17 +148,43 @@ class Arm(ps: PApplet){
 		// println("theta3"+theta(3)+"\n");
 		// println("theta4"+theta(4)+"\n");
 		
-		posVectorElbow = FK(Array(0.0,1.5,0.5,0.5,0),l(1),l(2))._1;
-		posVectorHand = FK(Array(0.0,1.5,0.5,0.5,0),l(1),l(2))._2;
+		posVectorElbow = FK(Array(0.0, 0.5,0.5,0,0),l(1),l(2))._1;
+		posVectorHand = FK(Array(0.0, 0.5,0.5,0,0),l(1),l(2))._2;
 		
-		var thetaVz = Math.atan2(-UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(0,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
-		var thetaVx = Math.atan2(-UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(2,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
+		var thetaVz = Math.atan2(UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(0,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
 		
-		var Tv0 = TransMat(0, 0, thetaVx, thetaVz);
+		var thetaVx = Math.atan2(UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(2,0),UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0));
+		println("x : " + thetaVx);
+		
+		if(UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0)<0){
+			thetaVx = thetaVx+math.Pi
+		}
+		 
+		Tv0 = TransMat(0, 0, 0, thetaVz).times(TransMat(0, 0, thetaVx, 0));
 		
 		println("z : " + thetaVz);
 		println("x : " + thetaVx);
 		
+		println("Vx : "+UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(0,0))
+		println("Vy : "+UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(1,0))
+		println("Vz : "+UnitVector(VectorProduct(posVectorHand,posVectorElbow)).get(2,0))
+		
+		var PveElbow = Tv0.times(posVectorElbow)
+		var PveHand = Tv0.times(posVectorHand)
+		
+		println("posVectorElbow x: " + posVectorElbow.get(0,0));
+		println("posVectorElbow y: " + posVectorElbow.get(1,0));
+		println("posVectorElbow z: " + posVectorElbow.get(2,0));
+		println("posVectorHand x: " + posVectorHand.get(0,0));
+		println("posVectorHand y: " + posVectorHand.get(1,0));
+		println("posVectorHand z: " + posVectorHand.get(2,0));
+		
+		println("PveElbow x: " + PveElbow.get(0,0));
+		println("PveElbow y: " + PveElbow.get(1,0));
+		println("PveElbow z: " + PveElbow.get(2,0));
+		println("PveHand x: " + PveHand.get(0,0));
+		println("PveHand y: " + PveHand.get(1,0));
+		println("PveHand z: " + PveHand.get(2,0));
 	}
 	def update() = {		
 	}
