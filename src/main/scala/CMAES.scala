@@ -15,7 +15,7 @@ class EvalByDirection(var ps: PApplet) extends IObjectiveFunction{
 		var res:Double = 0;
 		var a:Double = x(0)-10
 		var b:Double = x(1)-6
-		res = a*a + b*b
+		res = a*a + b*b + 2
 		println(x(1)+"\t"+x(0)+"\t"+res);
 		res
 		

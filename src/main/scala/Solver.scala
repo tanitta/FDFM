@@ -20,37 +20,39 @@ class Calculater(var ps: PApplet){
 	}
 
 	def draw = {
+		// Arm(データ)
+		// var i = 0;
+		for(i <- 5 to 5){
+			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			
+			ps.strokeWeight(10)
+			ps.fill(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			
+			ps.noFill()
+			ps.strokeWeight(15)
+			ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			
+			// if(i%4 == 0 ){
+				ps.strokeWeight(1)	
+				ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+				ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// }
+			
+			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
+			ps.strokeWeight(6)
+			ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			
+			ps.strokeWeight(11)
+			ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			
+			// ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			// ps.strokeWeight(16)
+			// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+		}
 		armIns.draw();
-		//Arm(データ)
-		// for(i <- 0 to Data.dataElbow.length-1){
-		// 	ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
-			
-		// 	ps.strokeWeight(10)
-		// 	ps.fill(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
-		// 	ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-			
-		// 	ps.noFill()
-		// 	ps.strokeWeight(15)
-		// 	ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-			
-		// 	// if(i%4 == 0 ){
-		// 		ps.strokeWeight(1)	
-		// 		ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-		// 		ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-		// 	// }
-			
-		// 	ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
-		// 	ps.strokeWeight(6)
-		// 	ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-			
-		// 	ps.strokeWeight(11)
-		// 	ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-			
-		// 	// ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
-		// 	// ps.strokeWeight(16)
-		// 	// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-		// 	// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-		// }
+		
 	}
 	// var theta = new Array[Double](5)
 	
@@ -302,11 +304,36 @@ class ArmDrawer(var armIns:arm.Arm, var ps: PApplet){
 		vec.get(0,0).toFloat,vec.get(1,0).toFloat,vec.get(2,0).toFloat)
 	}
 	
+	def DrawV = {
+
+		ps.strokeWeight(5)
+		ps.stroke(0, 0, 0)
+		ps.line(0,0,0,
+		armIns.P0Ve.get(0,0).toFloat*0.42f,
+		armIns.P0Ve.get(1,0).toFloat*0.42f,
+		armIns.P0Ve.get(2,0).toFloat*0.42f)
+	
+	
+		var vec = armIns.T0v.times(new Jama.Matrix(Array(
+			Array(0.0),
+			Array(0.1),
+			Array(0.0),
+			Array(1.0)
+		),4,1))
+		ps.strokeWeight(10)
+		ps.stroke(50, 50, 50)
+		ps.line(0,0,0,
+		vec.get(0,0).toFloat*4f,
+		vec.get(1,0).toFloat*4f,
+		vec.get(2,0).toFloat*4f)
+	}
+	
 	def DrawAxis() = {
 		DrawAxis1
 		DrawAxis2
 		DrawAxis3
 		DrawAxis4
+		DrawV
 	}
 	
 	def DrawArm() = {

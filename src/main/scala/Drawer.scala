@@ -5,7 +5,7 @@ import trit.fdfm._
 class Camera(var ps:PApplet){
 	var fov = 0.04f		
 	var rotate = -1.0
-	
+	var rotatex = -1.0
 	var ax = 0.0f
 	var ay = 0.0f
 	var az = 0.0f
@@ -20,9 +20,11 @@ class Camera(var ps:PApplet){
 	
 	def update = {
 		rotate += (ps.pmouseX-ps.mouseX).toDouble*0.01
- 		var x:Double = 15.0*math.cos(rotate)
- 		var z:Double = 15.0*math.sin(rotate)
-		ps.camera( x.toFloat , -10.0f, z.toFloat, // 視点X, 視点Y, 視点Z
+		rotatex += (ps.pmouseY-ps.mouseY).toDouble*0.005
+ 		var x:Double = 20.0*math.cos(rotate)*math.cos(rotatex)
+ 		var z:Double = 20.0*math.sin(rotate)*math.cos(rotatex)
+ 		var y:Double = 20.0*math.sin(rotatex)
+		ps.camera( x.toFloat , y.toFloat, z.toFloat, // 視点X, 視点Y, 視点Z
 		0, 0, 0, // 中心点X, 中心点Y, 中心点Z
 		0.0f, 1.0f, 0.0f); // 天地X, 天地Y, 天地Z
  		ps.perspective(fov, -Env.General.sizScreenX.toFloat/Env.General.sizScreenY.toFloat, 0.01f, 400.00f)			

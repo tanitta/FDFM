@@ -8,7 +8,7 @@ object Data{
 	
 	//台形速度制御
 	class RUDC(xs:Double, xf:Double, itf:Double){
-		var tUPerTF = 0.001
+		var tUPerTF = 0.0001
 		var tUnit = itf*tUPerTF //単位時間
 		
 		var tA:Double = 0.05 //加減速時間const
