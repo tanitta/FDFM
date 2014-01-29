@@ -148,10 +148,10 @@ class Arm(ps: PApplet){
 	//return: Array[Double](5)
 	def IK(inPosVectorElbow:Jama.Matrix, inPosVectorHand:Jama.Matrix) = {
 		var t = new Array[Double](5)
-		t(1) = math.atan(inPosVectorElbow.get(1,0)/inPosVectorElbow.get(0,0))
+		t(1) = math.atan2(inPosVectorElbow.get(1,0),inPosVectorElbow.get(0,0))
 		
 		var rXY0 = math.pow(math.pow(inPosVectorElbow.get(0,0),2.0)+math.pow(inPosVectorElbow.get(1,0),2.0),0.5)
-		t(2) = math.atan2(rXY0,inPosVectorElbow.get(2,0))+math.Pi
+		t(2) = -math.atan2(rXY0,-inPosVectorElbow.get(2,0))//+math.Pi
 		
 		var T01 = TransMat(0.0, 0.0, -math.Pi/2.0, t(1))
 		var T12 = TransMat(0.0, 0.0, math.Pi/2.0, t(2))
@@ -162,6 +162,11 @@ class Arm(ps: PApplet){
 		
 		var rXY2 = math.pow(math.pow(posVectorHand2.get(0,0),2.0)+math.pow(posVectorHand2.get(1,0),2.0),0.5)
 		t(4) = math.atan2(posVectorHand2.get(2,0)+l(1),rXY2)
+		
+		t(1) = t(1)%(2.0*math.Pi)
+		t(2) = t(2)%(2.0*math.Pi)
+		t(3) = t(3)%(2.0*math.Pi)
+		t(4) = t(4)%(2.0*math.Pi)
 		
 		t		
 	}
@@ -234,7 +239,7 @@ class Arm(ps: PApplet){
 		var P0cHandFinish = P0cHand
 		var thetaFinish = IK(P0cElbowFinish,P0cHandFinish)
 		
-		P0cHand = FK(thetaFinish,l(1),l(2))._2	
+		// P0cHand = FK(thetaFinish,l(1),l(2))._2	
 		
 		//台形速度制御の初期化
 		var rudc = new Array[Data.RUDC](4)
@@ -274,6 +279,29 @@ class Arm(ps: PApplet){
 	def setup() = {	
 		var testArray = Array(0.05,0.05,0.05,0.05)
 		// println("Eval : " + Eval(testArray))
+		// Eval(testArray)
+		
+		// P0cElbow = new Jama.Matrix(Array(
+		// 	Array(0.0),
+		// 	Array(0.0),
+		// 	Array(0.3),
+		// 	Array(1.0)
+		// ),4,1)
+		
+		// P0cHand = new Jama.Matrix(Array(
+		// 	Array(0.0),
+		// 	Array(0.32),
+		// 	Array(0.3),
+		// 	Array(1.0)
+		// ),4,1)
+		
+		// var thetaStart = IK(P0cElbow,P0cHand)
+		// println("theta1 : " + thetaStart(1))
+		// println("theta2 : " + thetaStart(2))
+		// println("theta3 : " + thetaStart(3))
+		// println("theta4 : " + thetaStart(4))
+		// P0cElbow = FK(thetaStart,l(1),l(2))._1
+		// P0cHand = FK(thetaStart,l(1),l(2))._2
 		
 			
 		// println("P0cElbow x: " + P0cElbow.get(0,0));
@@ -330,11 +358,26 @@ class Arm(ps: PApplet){
 	def update() = {		
 	}
 	def draw() = {
-		for( i <- 0 to 4){
-		ExpToCalc(i*10)
-		armDrawer.DrawArm();
-		armDrawer.DrawAxis();
-		}
+		// for( i <- 0 to 46){
+		// 	ExpToCalc(i)
+			
+			
+			
+			
+		// 	var P0cElbowStart = P0cElbow
+		// 	var P0cHandStart = P0cHand
+		// 	var thetaStart = IK(P0cElbowStart,P0cHandStart)
+		// 	println("theta1 : " + thetaStart(1))
+		// 	println("theta2 : " + thetaStart(2))
+		// 	println("theta3 : " + thetaStart(3))
+		// 	println("theta4 : " + thetaStart(4))
+		// 	P0cElbow = FK(thetaStart,l(1),l(2))._1
+		// 	P0cHand = FK(thetaStart,l(1),l(2))._2	
+			
+			
+		// 	armDrawer.DrawArm();
+		// 	armDrawer.DrawAxis();	
+		// }
 	}
 }
 

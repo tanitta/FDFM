@@ -22,8 +22,8 @@ class Calculater(var ps: PApplet){
 	def draw = {
 		// Arm(データ)
 		// var i = 0;
-		for(a <- 0 to 4){
-			var i = a*10
+		for(a <- 0 to 46){
+			var i = a 
 			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
 			
 			ps.strokeWeight(10)
