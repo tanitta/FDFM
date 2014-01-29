@@ -186,16 +186,23 @@ class Arm(ps: PApplet){
 			
 		PvcHand = PveHand
 		
-		var ld:Double = math.pow(math.pow(PvcHand.get(2,0),2.0)+math.pow(PvcHand.get(0,0),2.0),0.5)
-		var tmpAngle1 = math.atan2(PvcHand.get(0,0),PvcHand.get(2,0))
-		var tmpAngle2 = tmpAngle1-math.acos((math.pow(l(1),2.0)-math.pow(l(2),2.0)+math.pow(ld,2.0))/(2.0*l(1)*ld))
-		println("ld : " + ld)
+		var ld:Double = math.pow(math.pow(PveHand.get(2,0),2.0)+math.pow(PveHand.get(0,0),2.0),0.5)
+		var tmpAngle1 = math.atan2(PvcHand.get(2,0),PvcHand.get(0,0))
+		var tmpAngle2 = tmpAngle1 - math.acos((math.pow(l(1),2.0)-math.pow(l(2),2.0)+math.pow(ld,2.0))/(2.0*l(1)*ld))
+		// println(" :" + math.atan2(1,0))
 		PvcElbow = new Jama.Matrix(Array(
 			Array(math.cos(tmpAngle2)*l(1)),
 			Array(0.0),
 			Array(math.sin(tmpAngle2)*l(1)),
 			Array(1.0)
 		),4,1)
+		
+		// PvcElbow = new Jama.Matrix(Array(
+		// 	Array(0.0),
+		// 	Array(0.0),
+		// 	Array(1.0),
+		// 	Array(1.0)
+		// ),4,1)
 		
 		// println()
 		// println("ld" + ld)
@@ -227,12 +234,14 @@ class Arm(ps: PApplet){
 		var P0cHandFinish = P0cHand
 		var thetaFinish = IK(P0cElbowFinish,P0cHandFinish)
 		
+		P0cHand = FK(thetaFinish,l(1),l(2))._2	
+		
 		//台形速度制御の初期化
 		var rudc = new Array[Data.RUDC](4)
 		for( i <- 0 until 4) {
 			rudc(i) = new Data.RUDC(thetaStart(i+1),thetaFinish(i+1),47.0/60.0)
 			rudc(i).SetTA(x(i))
-			println("start " + thetaStart(i+1) + "finish " + thetaFinish(i+1))
+			// println("start " + thetaStart(i+1) + "finish " + thetaFinish(i+1))
 		}
 		
 		//計測値と計算値の手先の距離
@@ -256,7 +265,7 @@ class Arm(ps: PApplet){
 			dy = math.abs(P0cHand.get(1,0) + Data.dataHand(c)(2))
 			dz = math.abs(P0cHand.get(2,0) - Data.dataHand(c)(1))
 			d = math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
-			println("d:\t" + math.pow(d,0.5))
+			// println("d:\t" + math.pow(d,0.5))
 		// }
 		
 		math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
@@ -321,8 +330,8 @@ class Arm(ps: PApplet){
 	def update() = {		
 	}
 	def draw() = {
-		for( i <- 46 to 46){
-		ExpToCalc(i)
+		for( i <- 0 to 4){
+		ExpToCalc(i*10)
 		armDrawer.DrawArm();
 		armDrawer.DrawAxis();
 		}
