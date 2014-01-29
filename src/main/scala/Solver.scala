@@ -12,7 +12,8 @@ class Calculater(var ps: PApplet){
 		// PTPSolver(47.0/60.0)
 		// FK(theta(1),theta(2),theta(3),theta(4),getL1((Data.stepMax-1)),getL2((Data.stepMax-1)))
 		armIns.setup();
-		// cmaes.Solve()
+		cmaes.Solve()
+		armIns.SetGene(cmaes.GetGene())
 	}
 	
 	def update = {

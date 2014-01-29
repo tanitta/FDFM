@@ -4,7 +4,77 @@ object Data{
 	var unitTime:Double = 1.0/60.0
 	var tf:Double = unitTime*47.0
 	var stepMax:Int = (tf/unitTime).toInt
-	println("stepMax" + stepMax)
+	
+	var vals:Int = 4
+	
+	
+	// //線形補間速度制御
+	// class LIC(xs:Double, xf:Double, itf:Double){
+	// 	class Point(){
+	// 		var xRaw = 0.0
+	// 		var yRaw = 0.0
+			
+	// 		var xNormal = 0.0
+	// 		var yNormal = 0.0
+			
+	// 		var a = 0;
+	// 		var b = 0;
+	// 	}
+		
+	// 	var tUPerTF = 0.0001
+	// 	var tUnit = itf*tUPerTF //単位時間
+		
+	// 	var tp = new Array[Point](Data.vals+1)
+		
+	// 	var tF:Double = itf //動作時間
+		
+	// 	var xStart:Double = xs //初期値
+	// 	var xFinish:Double = xf //終了値
+		
+	// 	var defMax:Double = 0.0 //最大値
+		
+	// 	def SetGene(p:Array[Double])={
+	// 		// 最初の点
+	// 		tp(0).xRaw = 0.0
+	// 		for( i <- 0 until Data.vals) {
+	// 			tp(i+1).xRaw = p(i)
+	// 		}
+	// 		// 最後の点
+	// 		tp(Data.vals+1).xRaw = 0.0
+	// 	}
+		
+	// 	def SetTUnit(itu:Double) = {
+	// 		tUnit = itu
+	// 	}
+		
+	// 	def TotalDef():Double = {
+	// 		return xFinish - xStart 
+	// 	}
+		
+	// 	def DefMax():Double = {
+	// 		return TotalDef/tf
+	// 	}
+		
+	// 	def Def(t: Double):Double = {
+	// 		var d:Double = 0.0
+			
+	// 		d = DefMax
+			
+	// 		return d
+	// 	}
+			
+	// 	def CurrentVal(t: Double):Double = {
+	// 		var step:Double = t/tUnit
+	// 		var counter:Double = xStart //値のカウント
+	// 		for( i <- 0 to step.toInt) {
+	// 			counter += Def(i.toDouble*tUnit)*tUnit
+	// 		}
+	// 		return counter 
+	// 	}
+		
+		
+	// }
+	
 	
 	//台形速度制御
 	class RUDC(xs:Double, xf:Double, itf:Double){
@@ -12,6 +82,7 @@ object Data{
 		var tUnit = itf*tUPerTF //単位時間
 		
 		var tA:Double = 0.05 //加減速時間const
+		var tD:Double = 0.0
 		var tF:Double = itf //動作時間
 		
 		var xStart:Double = xs //初期値
@@ -27,20 +98,23 @@ object Data{
 			tA = it
 		}
 		
+		def SetTD(it: Double) = {
+			tD = it
+		}
 		def TotalDef():Double = {
 			return xFinish - xStart 
 		}
 		
 		def DefMax():Double = {
-			return TotalDef/(tF-tA)	
+			return TotalDef/(tF-tA-tD)	
 		}
 		
 		def Def(t: Double):Double = {
 			var d:Double = 0.0
-			if(0 <= t && t < tA){
-				d = DefMax/tA*t
+			if(0+tD <= t && t < tA+tD){
+				d = DefMax/tA*(t-tD)
 			}
-			if(tA <= t && t < tF-tA){
+			if(tA+tD <= t && t < tF-tA){
 				d = DefMax
 			}
 			if(tF-tA <= t && t <= tF){

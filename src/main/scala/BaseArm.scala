@@ -82,6 +82,8 @@ class Arm(ps: PApplet){
 	var Tv0 = new Jama.Matrix(4,4)
 	
 	var T0v = new Jama.Matrix(4,4)
+	
+	var gene = Array(0.05,0.05,0.05,0.05)
 
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 		var tmz = new Matrix(Array(
@@ -225,7 +227,25 @@ class Arm(ps: PApplet){
 		P0cHand = T0v.times(PvcHand)
 	}
 	
+	def SetGene(x:Array[Double]){
+		gene = x
+	}
+	
 	def Eval(x:Array[Double]):Double = {
+		// println("----------------Eval----------------")
+		//遺伝子データの上限下限の設定
+		// for( i <- 0 until 3) {
+		// 	if(x(i) < 0.0){
+		// 		x(i) = 0.0
+		// 	}
+			
+		// 	if(x(i) > 47.0/60.0*0.5){
+		// 		x(i) = 47.0/60.0*0.5
+		// 	}
+		// }
+		
+		
+		
 		//開始，終了時刻での肘，手先ベクトルから関節角を計算しておく
 		//start
 		ExpToCalc(0)
@@ -241,27 +261,43 @@ class Arm(ps: PApplet){
 		
 		// P0cHand = FK(thetaFinish,l(1),l(2))._2	
 		
-		//台形速度制御の初期化
+		
 		var rudc = new Array[Data.RUDC](4)
+		
+		//台形速度制御の初期化
 		for( i <- 0 until 4) {
 			rudc(i) = new Data.RUDC(thetaStart(i+1),thetaFinish(i+1),47.0/60.0)
-			rudc(i).SetTA(x(i))
-			// println("start " + thetaStart(i+1) + "finish " + thetaFinish(i+1))
 		}
+		
+		rudc(0).SetTA(x(0))
+		rudc(1).SetTA(x(0))
+		rudc(2).SetTA(x(0))
+		rudc(3).SetTA(x(1))
+		
+		rudc(0).SetTD(x(2))
+		rudc(1).SetTD(x(2))
+		rudc(2).SetTD(x(2))
+		rudc(3).SetTD(x(3))
+		
+		
 		
 		//計測値と計算値の手先の距離
 		var dx:Double = 0
 		var dy:Double = 0
 		var dz:Double = 0
-		var d:Double = 0
-		// for( c <- 0 until Data.stepMax) {
-		var c = 0
+		var d2:Double = 0
+		for( c <- 0 until Data.stepMax) {
+		// var c = 0
 			var tmpTheta = new Array[Double](5)
 			
-			//各関節の角度を設定
+			// 各関節の角度を設定
 			for( i <- 0 until 4) {
 				tmpTheta(i+1) = rudc(i).CurrentVal(c.toDouble*Data.unitTime)
 			}
+			
+			// tmpTheta(0) = rudc(0).tA//CurrentVal(c.toDouble*Data.unitTime)
+
+			
 			
 			P0cElbow = FK(tmpTheta, l(1), l(2))._1
 			P0cHand = FK(tmpTheta, l(1), l(2))._2
@@ -269,18 +305,22 @@ class Arm(ps: PApplet){
 			dx = math.abs(P0cHand.get(0,0) - Data.dataHand(c)(0))
 			dy = math.abs(P0cHand.get(1,0) + Data.dataHand(c)(2))
 			dz = math.abs(P0cHand.get(2,0) - Data.dataHand(c)(1))
-			d = math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
-			// println("d:\t" + math.pow(d,0.5))
-		// }
+			d2 += math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
+			// println("d:\t" + math.pow(d,0.5))	
+			armDrawer.DrawArm();
+		}
 		
-		math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
+		// math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
+		println(x(0)+"\t"+x(1)+"\t"+x(2)+"\t"+x(3)+"\t"+d2);
+		
+		d2
 	}
 	
 	def setup() = {	
-		var testArray = Array(0.05,0.05,0.05,0.05)
-		// println("Eval : " + Eval(testArray))
+		// var testArray = Array(0.39,0.39,0.39,0.39)
+		// // // println("Eval : " + Eval(testArray))
 		// Eval(testArray)
-		
+		// println("Eval : " + Eval(testArray))
 		// P0cElbow = new Jama.Matrix(Array(
 		// 	Array(0.0),
 		// 	Array(0.0),
@@ -358,49 +398,28 @@ class Arm(ps: PApplet){
 	def update() = {		
 	}
 	def draw() = {
+		Eval(gene)
+		
+		
+		
 		// for( i <- 0 to 46){
 		// 	ExpToCalc(i)
 			
-			
+		// 	var testArray = Array(0.05,0.05,0.05,0.05)
+		// 	// println("Eval : " + Eval(testArray))
+		// 	Eval(testArray)
 			
 			
 		// 	var P0cElbowStart = P0cElbow
 		// 	var P0cHandStart = P0cHand
 		// 	var thetaStart = IK(P0cElbowStart,P0cHandStart)
-		// 	println("theta1 : " + thetaStart(1))
-		// 	println("theta2 : " + thetaStart(2))
-		// 	println("theta3 : " + thetaStart(3))
-		// 	println("theta4 : " + thetaStart(4))
+			
 		// 	P0cElbow = FK(thetaStart,l(1),l(2))._1
 		// 	P0cHand = FK(thetaStart,l(1),l(2))._2	
 			
 			
-		// 	armDrawer.DrawArm();
-		// 	armDrawer.DrawAxis();	
+		// 	// sarmDrawer.DrawAxis();	
 		// }
 	}
 }
 
-class GArm(ps: PApplet) extends Arm(ps) {
-	//Gene
-	var gene = new Array[Double](4)
-	
-	def SetGene(t0:Double, t1:Double, t2:Double, t3:Double) = {
-		gene(0) = t0
-		gene(1) = t1
-		gene(2) = t2
-		gene(3) = t3
-	}
-	
-	def SetGeneRand() = {
-		gene(0) = 0
-		gene(1) = 0
-		gene(2) = 0
-		gene(3) = 0
-	}
-	
-	def setParson(p1 : Arm, p2 : Arm) = {
-		// p1.angle(1) = 0
-		// angle(1) = 0
-	}
-}

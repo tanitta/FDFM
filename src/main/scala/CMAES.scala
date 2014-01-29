@@ -12,22 +12,49 @@ class EvalByDirection(var ps: PApplet) extends IObjectiveFunction{
 	var armObj = new arm.Arm(ps)
 	
 	override def valueOf(x:Array[Double]):Double = {
-		var res:Double = 0;
-		var a:Double = x(0)-10
-		var b:Double = x(1)-6
-		res = a*a + b*b + 2
-		println(x(1)+"\t"+x(0)+"\t"+res);
-		res
-		
 		// var res:Double = 0;
-		// for (i <- 0 until x.length-1){
-		// 	res += 100 * (x(i)*x(i) - x(i+1)) * (x(i)*x(i) - x(i+1)) + (x(i) - 1.) * (x(i) - 1.);
-		// }
-		
+		// var a:Double = x(0)-10
+		// var b:Double = x(1)-6
+		// res = a*a + b*b + 2
+		// println(x(1)+"\t"+x(0)+"\t"+res);
 		// res
+		
+		
+		var res = armObj.Eval(x)
+		armObj.SetGene(x)
+		// println(x(0)+"\t"+x(1)+"\t"+x(2)+"\t"+x(3)+"\t"+res);
+		res
 	};
 	override def isFeasible(x:Array[Double]):Boolean = {
-		true;
+		//計算可能ならtrue
+		var flag = true
+		
+		for( i <- 2 until 4) {
+			if(x(i) < 0.0){
+				flag = false
+			}
+			if(x(i) > (47.0/60.0)){
+				flag = false
+			}
+			
+		}
+		
+		for( i <- 0 until 2) {
+			var tD = x(i+2)
+			if(x(i) < 0.0){
+				flag = false
+			}
+			if(x(i) > (47.0/60.0-tD)*0.5){
+				flag = false
+			}
+			
+		}
+		
+		flag
+	}
+	
+	def GetGene() = {
+		armObj.gene
 	}
 }
 
@@ -35,9 +62,9 @@ class CMAES(var ps: PApplet) {
 	var fitfun = new EvalByDirection(ps);
 	var cma = new CMAEvolutionStrategy();
 	cma.readProperties(); // read options, see file CMAEvolutionStrategy.properties
-	cma.setDimension(3); // overwrite some loaded properties
-	cma.setInitialX(5); // in each dimension, also setTypicalX can be used
-	cma.setInitialStandardDeviation(0.2); // also a mandatory setting 
+	cma.setDimension(4); // overwrite some loaded properties
+	cma.setInitialX(0.05); // in each dimension, also setTypicalX can be used
+	cma.setInitialStandardDeviation(0.5); // also a mandatory setting 
 	cma.options.stopFitness = 1e-9;       // optional setting
 	
 	var fitness:Array[Double] = cma.init();  // new double[cma.parameters.getPopulationSize()];
@@ -47,6 +74,8 @@ class CMAES(var ps: PApplet) {
 	
 	
 	def Solve() = {
+		println("----------------CMAES Solve----------------")
+		
 		while(cma.stopConditions.getNumber() == 0){
 			// var pop = cma.samplePopulation(); // get a new population of solutions
 			var pop:Array[Array[Double]] = cma.samplePopulation(); // get a new population of solutions
@@ -67,5 +96,9 @@ class CMAES(var ps: PApplet) {
 		}
 		
 		
+		
 	};
+	def GetGene() = {
+		fitfun.GetGene
+	}
 }
