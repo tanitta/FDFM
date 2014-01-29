@@ -8,8 +8,8 @@ class Arm(ps: PApplet){
 	var this.ps = ps
 	var theta = new Array[Double](5)
 	var l = new Array[Double](3)
-	l(1) = 0.30;
-	l(2) = 0.32;
+	l(1) = 0.35;
+	l(2) = 0.37;
 	
 	//単位列ベクトル
 	var collumVector = new Jama.Matrix(Array(
@@ -49,9 +49,9 @@ class Arm(ps: PApplet){
 	
 	def GetP0eElbow(i: Int) = {
 		var posVector = new Jama.Matrix(Array(
-			Array(Data.dataElbow(i)(0)),
-			Array(-Data.dataElbow(i)(2)),
-			Array(Data.dataElbow(i)(1)),
+			Array(Data.dataElbow2(i)(0)),
+			Array(-Data.dataElbow2(i)(2)),
+			Array(Data.dataElbow2(i)(1)),
 			Array(1.0)
 		),4,1)
 		posVector
@@ -59,9 +59,9 @@ class Arm(ps: PApplet){
 	
 	def GetP0eHand(i: Int) = {
 		var posVector = new Jama.Matrix(Array(
-			Array(Data.dataHand(i)(0)),
-			Array(-Data.dataHand(i)(2)),
-			Array(Data.dataHand(i)(1)),
+			Array(Data.dataHand2(i)(0)),
+			Array(-Data.dataHand2(i)(2)),
+			Array(Data.dataHand2(i)(1)),
 			Array(1.0)
 		),4,1)
 		posVector
@@ -266,7 +266,7 @@ class Arm(ps: PApplet){
 		
 		//台形速度制御の初期化
 		for( i <- 0 until 4) {
-			rudc(i) = new Data.RUDC(thetaStart(i+1),thetaFinish(i+1),47.0/60.0)
+			rudc(i) = new Data.RUDC(thetaStart(i+1),thetaFinish(i+1),Data.stepMax/60.0)
 		}
 		
 		rudc(0).SetTA(x(0))
@@ -302,9 +302,9 @@ class Arm(ps: PApplet){
 			P0cElbow = FK(tmpTheta, l(1), l(2))._1
 			P0cHand = FK(tmpTheta, l(1), l(2))._2
 			
-			dx = math.abs(P0cHand.get(0,0) - Data.dataHand(c)(0))
-			dy = math.abs(P0cHand.get(1,0) + Data.dataHand(c)(2))
-			dz = math.abs(P0cHand.get(2,0) - Data.dataHand(c)(1))
+			dx = math.abs(P0cHand.get(0,0) - GetP0eHand(c).get(0,0))
+			dy = math.abs(P0cHand.get(1,0) - GetP0eHand(c).get(1,0))
+			dz = math.abs(P0cHand.get(2,0) - GetP0eHand(c).get(2,0))
 			d2 += math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
 			// println("d:\t" + math.pow(d,0.5))	
 			armDrawer.DrawArm();
@@ -399,7 +399,8 @@ class Arm(ps: PApplet){
 	}
 	def draw() = {
 		Eval(gene)
-		
+		// ExpToCalc(10)
+		// armDrawer.DrawArm();
 		
 		
 		// for( i <- 0 to 46){

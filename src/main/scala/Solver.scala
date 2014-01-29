@@ -23,35 +23,35 @@ class Calculater(var ps: PApplet){
 	def draw = {
 		// Arm(データ)
 		// var i = 0;
-		for(a <- 0 to 46){
+		for(a <- 0 until Data.stepMax){
 			var i = a 
-			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			ps.stroke(i.toFloat/Data.dataElbow2.length.toFloat*100f, 0, 50)
 			
 			ps.strokeWeight(10)
-			ps.fill(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
-			ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			ps.fill(i.toFloat/Data.dataElbow2.length.toFloat*100f, 0, 50)
+			ps.point(Data.dataElbow2(i)(0).toFloat, -Data.dataElbow2(i)(2).toFloat, Data.dataElbow2(i)(1).toFloat)
 			
 			ps.noFill()
 			ps.strokeWeight(15)
-			ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			ps.point(Data.dataHand2(i)(0).toFloat, -Data.dataHand2(i)(2).toFloat, Data.dataHand2(i)(1).toFloat)
 			
 			// if(i%4 == 0 ){
 				ps.strokeWeight(1)	
-				ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-				ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+				ps.line(0,0,0,Data.dataElbow2(i)(0).toFloat, -Data.dataElbow2(i)(2).toFloat, Data.dataElbow2(i)(1).toFloat)
+				ps.line(Data.dataElbow2(i)(0).toFloat, -Data.dataElbow2(i)(2).toFloat, Data.dataElbow2(i)(1).toFloat,Data.dataHand2(i)(0).toFloat, -Data.dataHand2(i)(2).toFloat, Data.dataHand2(i)(1).toFloat)
 			// }
 			
-			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
+			ps.stroke(i.toFloat/Data.dataElbow2.length.toFloat*100f, 0, 100)
 			ps.strokeWeight(6)
-			ps.point(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
+			ps.point(Data.dataElbow2(i)(0).toFloat, -Data.dataElbow2(i)(2).toFloat, Data.dataElbow2(i)(1).toFloat)
 			
 			ps.strokeWeight(11)
-			ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			ps.point(Data.dataHand2(i)(0).toFloat, -Data.dataHand2(i)(2).toFloat, Data.dataHand2(i)(1).toFloat)
 			
-			// ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
+			// ps.stroke(i.toFloat/Data.dataElbow2.length.toFloat*100f, 0, 50)
 			// ps.strokeWeight(16)
-			// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
-			// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			// ps.line(0,0,0,Data.dataElbow2(i)(0).toFloat, -Data.dataElbow2(i)(2).toFloat, Data.dataElbow2(i)(1).toFloat)
+			// ps.line(Data.dataElbow2(i)(0).toFloat, -Data.dataElbow2(i)(2).toFloat, Data.dataElbow2(i)(1).toFloat,Data.dataHand2(i)(0).toFloat, -Data.dataHand2(i)(2).toFloat, Data.dataHand2(i)(1).toFloat)
 		}
 		armIns.draw();
 		
@@ -90,11 +90,11 @@ class Calculater(var ps: PApplet){
 	// ),4,1)
 	
 	// def getL1(index:Int):Double = {
-	// 	math.pow(math.pow(Data.dataElbow(index)(0),2.0)+math.pow(Data.dataElbow(index)(1),2.0)+math.pow(Data.dataElbow(index)(2),2.0),0.5)
+	// 	math.pow(math.pow(Data.dataElbow2(index)(0),2.0)+math.pow(Data.dataElbow2(index)(1),2.0)+math.pow(Data.dataElbow2(index)(2),2.0),0.5)
 	// }
 	
 	// def getL2(index:Int):Double = {
-	// 	math.pow(math.pow(Data.dataElbow(index)(0)-Data.dataHand(index)(0),2.0)+math.pow(Data.dataElbow(index)(1)-Data.dataHand(index)(1),2.0)+math.pow(Data.dataElbow(index)(2)-Data.dataHand(index)(2),2.0),0.5)
+	// 	math.pow(math.pow(Data.dataElbow2(index)(0)-Data.dataHand2(index)(0),2.0)+math.pow(Data.dataElbow2(index)(1)-Data.dataHand2(index)(1),2.0)+math.pow(Data.dataElbow2(index)(2)-Data.dataHand2(index)(2),2.0),0.5)
 	// }
 	
 	//FK
@@ -121,16 +121,16 @@ class Calculater(var ps: PApplet){
 	//return: Unit
 	// def IK(index:Int) = {	
 	// 	posVectorElbow = new Jama.Matrix(Array(
-	// 		Array(Data.dataElbow(index)(0)),
-	// 		Array(-Data.dataElbow(index)(2)),
-	// 		Array(Data.dataElbow(index)(1)),
+	// 		Array(Data.dataElbow2(index)(0)),
+	// 		Array(-Data.dataElbow2(index)(2)),
+	// 		Array(Data.dataElbow2(index)(1)),
 	// 		Array(1.0)
 	// 	),4,1)
 		
 	// 	posVectorHand = new Jama.Matrix(Array(
-	// 		Array(Data.dataHand(index)(0)),
-	// 		Array(-Data.dataHand(index)(2)),
-	// 		Array(Data.dataHand(index)(1)),
+	// 		Array(Data.dataHand2(index)(0)),
+	// 		Array(-Data.dataHand2(index)(2)),
+	// 		Array(Data.dataHand2(index)(1)),
 	// 		Array(1.0)
 	// 	),4,1)
 		
