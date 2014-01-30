@@ -2,7 +2,7 @@ package trit.fdfm
 object Data{
 	var at:Double = 0.05
 	var unitTime:Double = 1.0/60.0
-	var tf:Double = unitTime*54.0
+	var tf:Double = unitTime*47.0//54.0
 	var stepMax:Int = (tf/unitTime).toInt
 	
 	var vals:Int = 4

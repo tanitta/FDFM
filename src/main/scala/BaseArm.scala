@@ -49,9 +49,9 @@ class Arm(ps: PApplet){
 	
 	def GetP0eElbow(i: Int) = {
 		var posVector = new Jama.Matrix(Array(
-			Array(Data.dataElbow2(i)(0)),
-			Array(-Data.dataElbow2(i)(2)),
-			Array(Data.dataElbow2(i)(1)),
+			Array(Data.dataElbow(i)(0)),
+			Array(-Data.dataElbow(i)(2)),
+			Array(Data.dataElbow(i)(1)),
 			Array(1.0)
 		),4,1)
 		posVector
@@ -59,9 +59,9 @@ class Arm(ps: PApplet){
 	
 	def GetP0eHand(i: Int) = {
 		var posVector = new Jama.Matrix(Array(
-			Array(Data.dataHand2(i)(0)),
-			Array(-Data.dataHand2(i)(2)),
-			Array(Data.dataHand2(i)(1)),
+			Array(Data.dataHand(i)(0)),
+			Array(-Data.dataHand(i)(2)),
+			Array(Data.dataHand(i)(1)),
 			Array(1.0)
 		),4,1)
 		posVector
@@ -83,7 +83,7 @@ class Arm(ps: PApplet){
 	
 	var T0v = new Jama.Matrix(4,4)
 	
-	var gene = Array(0.05,0.05,0.05,0.05)
+	var gene = Array(0.2482,0.1653,0.0513,0.2260)
 
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 		var tmz = new Matrix(Array(
@@ -285,6 +285,7 @@ class Arm(ps: PApplet){
 		var dx:Double = 0
 		var dy:Double = 0
 		var dz:Double = 0
+		var d:Double = 0
 		var d2:Double = 0
 		for( c <- 0 until Data.stepMax) {
 		// var c = 0
@@ -305,18 +306,19 @@ class Arm(ps: PApplet){
 			dx = math.abs(P0cHand.get(0,0) - GetP0eHand(c).get(0,0))
 			dy = math.abs(P0cHand.get(1,0) - GetP0eHand(c).get(1,0))
 			dz = math.abs(P0cHand.get(2,0) - GetP0eHand(c).get(2,0))
-			d2 += math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
-			// println("d:\t" + math.pow(d,0.5))	
+			d = math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
+			println("s:\t" + math.pow(d,0.5))
 			armDrawer.DrawArm();
 		}
 		
 		// math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
-		println(x(0)+"\t"+x(1)+"\t"+x(2)+"\t"+x(3)+"\t"+d2);
+		// println(x(0)+"\t"+x(1)+"\t"+x(2)+"\t"+x(3)+"\t"+d2);
 		
 		d2
 	}
 	
 	def setup() = {	
+		// Eval(gene)
 		// var testArray = Array(0.39,0.39,0.39,0.39)
 		// // // println("Eval : " + Eval(testArray))
 		// Eval(testArray)
@@ -394,11 +396,14 @@ class Arm(ps: PApplet){
 		// println("PvcHand x: " + PvcHand.get(0,0));
 		// println("PvcHand y: " + PvcHand.get(1,0));
 		// println("PvcHand z: " + PvcHand.get(2,0));
+		println("--------setup--------")		
+		Eval(gene)
+		
 	}
 	def update() = {		
 	}
 	def draw() = {
-		Eval(gene)
+		// Eval(gene)
 		// ExpToCalc(10)
 		// armDrawer.DrawArm();
 		
