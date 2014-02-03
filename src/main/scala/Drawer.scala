@@ -5,7 +5,7 @@ import trit.fdfm._
 class Camera(var ps:PApplet){
 	var fov = 0.04f		
 	var rotate = -1.0
-	var rotatex = -1.0
+	var rotatex = -math.Pi/6
 	var ax = 0.0f
 	var ay = 0.0f
 	var az = 0.0f
@@ -19,8 +19,8 @@ class Camera(var ps:PApplet){
 	}
 	
 	def update = {
-		rotate += (ps.pmouseX-ps.mouseX).toDouble*0.01
-		rotatex += (ps.pmouseY-ps.mouseY).toDouble*0.005
+		// rotate += (ps.pmouseX-ps.mouseX).toDouble*0.01
+		// rotatex += (ps.pmouseY-ps.mouseY).toDouble*0.005
  		var x:Double = 20.0*math.cos(rotate)*math.cos(rotatex)
  		var z:Double = 20.0*math.sin(rotate)*math.cos(rotatex)
  		var y:Double = 20.0*math.sin(rotatex)

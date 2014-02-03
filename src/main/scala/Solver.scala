@@ -11,7 +11,7 @@ class Calculater(var ps: PApplet){
 	def setup = {
 		// PTPSolver(47.0/60.0)
 		// FK(theta(1),theta(2),theta(3),theta(4),getL1((Data.stepMax-1)),getL2((Data.stepMax-1)))
-		armIns.setup();
+		armIns.setup()
 		// cmaes.Solve()
 		// armIns.SetGene(cmaes.GetGene())
 	}
@@ -25,6 +25,8 @@ class Calculater(var ps: PApplet){
 		// var i = 0;
 		for(a <- 0 until Data.stepMax){
 			var i = a 
+			
+			
 			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 50)
 			
 			ps.strokeWeight(10)
@@ -35,11 +37,13 @@ class Calculater(var ps: PApplet){
 			ps.strokeWeight(15)
 			ps.point(Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
 			
-			// if(i%4 == 0 ){
+			if(i%4 == 0 ){
+			// if(i == 0 || i == Data.stepMax-1){
+				
 				ps.strokeWeight(1)	
 				ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 				ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
-			// }
+			}
 			
 			ps.stroke(i.toFloat/Data.dataElbow.length.toFloat*100f, 0, 100)
 			ps.strokeWeight(6)
@@ -52,6 +56,7 @@ class Calculater(var ps: PApplet){
 			// ps.strokeWeight(16)
 			// ps.line(0,0,0,Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat)
 			// ps.line(Data.dataElbow(i)(0).toFloat, -Data.dataElbow(i)(2).toFloat, Data.dataElbow(i)(1).toFloat,Data.dataHand(i)(0).toFloat, -Data.dataHand(i)(2).toFloat, Data.dataHand(i)(1).toFloat)
+			
 		}
 		armIns.draw();
 		
@@ -350,7 +355,7 @@ class ArmDrawer(var armIns:arm.Arm, var ps: PApplet){
 		ps.strokeWeight(15)
 		ps.point(armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
 		
-		
+		ps.stroke(0, 0, 0)	  
 		ps.strokeWeight(1)	
 		ps.line(0,0,0,armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
 		ps.line(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat,
@@ -362,5 +367,28 @@ class ArmDrawer(var armIns:arm.Arm, var ps: PApplet){
 		ps.point(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
 		ps.strokeWeight(11)
 		ps.point(armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
+	}
+	
+	def DrawArmLine() = {
+		ps.stroke(0, 0, 0)	  
+		ps.strokeWeight(1)	
+		ps.line(0,0,0,armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
+		ps.line(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat,
+		armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
+	}
+	def DrawArmPoint() = {
+		ps.fill(0, 0, 0)
+		ps.strokeWeight(10)
+		ps.point(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
+		ps.strokeWeight(15)
+		ps.point(armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
+		
+		ps.fill(0, 0, 0)	  
+		ps.strokeWeight(6)
+		ps.point(armIns.P0cElbow.get(0,0).toFloat,armIns.P0cElbow.get(1,0).toFloat,armIns.P0cElbow.get(2,0).toFloat)
+		ps.strokeWeight(11)
+		ps.point(armIns.P0cHand.get(0,0).toFloat,armIns.P0cHand.get(1,0).toFloat,armIns.P0cHand.get(2,0).toFloat)
+
+		
 	}
 }

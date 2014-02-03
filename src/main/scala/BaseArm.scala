@@ -83,8 +83,21 @@ class Arm(ps: PApplet){
 	
 	var T0v = new Jama.Matrix(4,4)
 	
+	//mov1
+	// var gene = Array(0.05,0.05,0,0)
+	// var gene = Array(0.4499100010092542,0.4499099975292252,0,0)
+	// var gene = Array(0.4498200000117409,	0.4499099999620027,0,0)
+	
+	//mov2(突き出し)
+	// Arm1
+	// var gene = Array(0.05,0.05,0,0)
+	// Arm2
+	// var gene = Array(0.3916,0.2800,0,0)
+	// Arm3
+	// var gene = Array(0.05,0.05,0.03569666637974663,0.2618683295046492)
+	// Arm4
 	var gene = Array(0.2482,0.1653,0.0513,0.2260)
-
+	
 	def TransMat(a:Double,d:Double,alpha:Double,theta:Double): Jama.Matrix = {
 		var tmz = new Matrix(Array(
 			Array(math.cos(theta),	-math.sin(theta),	0.0,	0.0),
@@ -308,13 +321,19 @@ class Arm(ps: PApplet){
 			dz = math.abs(P0cHand.get(2,0) - GetP0eHand(c).get(2,0))
 			d = math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
 			println("s:\t" + math.pow(d,0.5))
-			armDrawer.DrawArm();
+			
+			if(c%4 == 0 ){
+			// if(c == 0 || c == Data.stepMax-1){
+				armDrawer.DrawArmLine();
+			}
+			armDrawer.DrawArmPoint();
+			
 		}
 		
 		// math.pow(dx,2.0) + math.pow(dy,2.0) + math.pow(dz,2.0)
-		// println(x(0)+"\t"+x(1)+"\t"+x(2)+"\t"+x(3)+"\t"+d2);
+		// println(x(0)+"\t"+x(1)+"\t"+x(2)+"\t"+x(3)+"\t"+d);
 		
-		d2
+		d
 	}
 	
 	def setup() = {	
@@ -396,14 +415,14 @@ class Arm(ps: PApplet){
 		// println("PvcHand x: " + PvcHand.get(0,0));
 		// println("PvcHand y: " + PvcHand.get(1,0));
 		// println("PvcHand z: " + PvcHand.get(2,0));
-		println("--------setup--------")		
-		Eval(gene)
+		// println("--------setup--------")		
+		// Eval(gene)
 		
 	}
 	def update() = {		
 	}
 	def draw() = {
-		// Eval(gene)
+		Eval(gene)
 		// ExpToCalc(10)
 		// armDrawer.DrawArm();
 		

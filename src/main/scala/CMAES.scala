@@ -33,7 +33,7 @@ class EvalByDirection(var ps: PApplet) extends IObjectiveFunction{
 			if(x(i) < 0.0){
 				flag = false
 			}
-			if(x(i) > (47.0/60.0)){
+			if(x(i) > (Data.stepMax.toDouble/60.0)){
 				flag = false
 			}
 			
@@ -44,7 +44,7 @@ class EvalByDirection(var ps: PApplet) extends IObjectiveFunction{
 			if(x(i) < 0.0){
 				flag = false
 			}
-			if(x(i) > (47.0/60.0-tD)*0.5){
+			if(x(i) > (Data.stepMax.toDouble/60.0-tD)*0.5){
 				flag = false
 			}
 			
