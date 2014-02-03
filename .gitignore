@@ -3,6 +3,7 @@ doc/
 target/
 project/
 src/main/java/
+*.dat
 *.log
 *.sublime-workspace
 *.sublime-project
