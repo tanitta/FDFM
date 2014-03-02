@@ -11,16 +11,16 @@ object Main extends processing.core.PApplet {
 		drawer.setup
 	}
 	
-	def update(){
-		calculater.update
-		drawer.update
-	}
+	// def update(){
+	// 	calculater.update
+	// 	drawer.update
+	// }
 	
 	override def draw(){
-		update
+		// update
 		
-		drawer.draw
-		calculater.draw
+		// drawer.draw
+		// calculater.draw
 	}
 	
 	def main(args: Array[String]){

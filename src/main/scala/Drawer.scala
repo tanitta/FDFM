@@ -36,9 +36,9 @@ class Drawer(var ps: PApplet){
 	
 	def setup = {
 		ps.size(Env.General.sizScreenX,Env.General.sizScreenY,PConstants.OPENGL)
-		ps.colorMode(PConstants.HSB, 100)
-		ps.background(0,0,100)
-		ps.smooth()
+		// ps.colorMode(PConstants.HSB, 100)
+		// ps.background(0,0,100)
+		// ps.smooth()
 	}
 	def update = {}
 	def draw = {
